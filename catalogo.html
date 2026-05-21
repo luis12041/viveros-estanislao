@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta 
+        name="viewport" 
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Viveros Estanislao
+    </title>
+
+    <link 
+        rel="stylesheet" 
+        href="css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>
+            🌿 Viveros Estanislao
+        </h1>
+
+        <button id="abrirCarrito">
+
+            🛒 <span id="contador">0</span>
+
+        </button>
+
+    </header>
+
+    <main>
+
+        <section class="hero">
+
+            <h2>
+                Catálogo de Plantas
+            </h2>
+
+            <p>
+                Encuentra plantas para interior y exterior
+            </p>
+
+        </section>
+
+        <!-- BUSCADOR -->
+
+        <section class="filtros">
+
+            <input
+                type="text"
+                id="buscador"
+                placeholder="🔍 Buscar planta..."
+            >
+
+            <select id="filtroLuz">
+
+                <option value="">
+                    Tipo de luz
+                </option>
+
+                <option>
+                    Sol
+                </option>
+
+                <option>
+                    Sombra
+                </option>
+
+                <option>
+                    Luz indirecta
+                </option>
+
+            </select>
+
+            <select id="filtroRiego">
+
+                <option value="">
+                    Tipo de riego
+                </option>
+
+                <option>
+                    Poco riego
+                </option>
+
+                <option>
+                    Riego moderado
+                </option>
+
+                <option>
+                    Riego frecuente
+                </option>
+
+            </select>
+
+        </section>
+
+        <!-- CATALOGO -->
+
+        <section 
+            class="catalogo"
+            id="catalogo"
+        >
+
+        </section>
+
+    </main>
+
+    <!-- CARRITO -->
+
+    <aside id="carrito" class="carrito">
+
+        <div class="carrito-header">
+
+            <h2>
+                🛒 Carrito
+            </h2>
+
+            <span id="cerrarCarrito">
+
+                ✖
+
+            </span>
+
+        </div>
+
+        <div id="carritoItems">
+
+        </div>
+
+        <h3 id="total">
+
+            Total: $0
+
+        </h3>
+
+        <button id="finalizarCompra">
+
+            Finalizar compra
+
+        </button>
+
+    </aside>
+
+    <script 
+        type="module"
+        src="js/app.js"
+    ></script>
+
+</body>
+</html>

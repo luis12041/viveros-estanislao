@@ -163,8 +163,7 @@ btnLogin.addEventListener(
 
             }else{
 
-                window.location.href =
-                "index.html";
+               window.location.href = "catalogo.html";
 
             }
 

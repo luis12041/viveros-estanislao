@@ -5,17 +5,17 @@
 
     <meta charset="UTF-8">
 
-    <meta 
-        name="viewport" 
+    <meta
+        name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
 
     <title>
-        Viveros Estanislao
+        Login
     </title>
 
-    <link 
-        rel="stylesheet" 
+    <link
+        rel="stylesheet"
         href="css/style.css"
     >
 
@@ -23,137 +23,78 @@
 
 <body>
 
-    <header>
+    <div class="login-container">
 
-        <h1>
-            🌿 Viveros Estanislao
-        </h1>
+        <div class="login-box">
 
-        <button id="abrirCarrito">
-
-            🛒 <span id="contador">0</span>
-
-        </button>
-
-    </header>
-
-    <main>
-
-        <section class="hero">
+            <h1>
+                🌿 Viveros Estanislao
+            </h1>
 
             <h2>
-                Catálogo de Plantas
+                Iniciar Sesión
             </h2>
-
-            <p>
-                Encuentra plantas para interior y exterior
-            </p>
-
-        </section>
-
-        <!-- BUSCADOR -->
-
-        <section class="filtros">
 
             <input
                 type="text"
-                id="buscador"
-                placeholder="🔍 Buscar planta..."
+                id="nombre"
+                placeholder="Nombre completo"
             >
 
-            <select id="filtroLuz">
+            <button
+                id="btnUbicacion"
+                class="btn-ubicacion"
+            >
 
-                <option value="">
-                    Tipo de luz
-                </option>
+                📍 Usar mi ubicación actual
 
-                <option>
-                    Sol
-                </option>
+            </button>
 
-                <option>
-                    Sombra
-                </option>
+            <input
+                type="email"
+                id="correo"
+                placeholder="Correo electrónico"
+            >
 
-                <option>
-                    Luz indirecta
-                </option>
+            <input
+                type="password"
+                id="password"
+                placeholder="Contraseña"
+            >
 
-            </select>
+            <button id="btnLogin">
 
-            <select id="filtroRiego">
+                Entrar
 
-                <option value="">
-                    Tipo de riego
-                </option>
+            </button>
 
-                <option>
-                    Poco riego
-                </option>
+            <button
+                id="btnRegistro"
+                class="btn-secundario"
+            >
 
-                <option>
-                    Riego moderado
-                </option>
+                Crear cuenta
 
-                <option>
-                    Riego frecuente
-                </option>
+            </button>
 
-            </select>
+            <button
+                id="btnRecuperar"
+                class="btn-recuperar"
+            >
 
-        </section>
+                Olvidé mi contraseña
 
-        <!-- CATALOGO -->
-
-        <section 
-            class="catalogo"
-            id="catalogo"
-        >
-
-        </section>
-
-    </main>
-
-    <!-- CARRITO -->
-
-    <aside id="carrito" class="carrito">
-
-        <div class="carrito-header">
-
-            <h2>
-                🛒 Carrito
-            </h2>
-
-            <span id="cerrarCarrito">
-
-                ✖
-
-            </span>
+            </button>
 
         </div>
 
-        <div id="carritoItems">
+    </div>
 
-        </div>
-
-        <h3 id="total">
-
-            Total: $0
-
-        </h3>
-
-        <button id="finalizarCompra">
-
-            Finalizar compra
-
-        </button>
-
-    </aside>
-
-    <script 
+    <script
         type="module"
-        src="js/app.js"
+        src="js/login.js"
     ></script>
 
 </body>
+
 </html>
