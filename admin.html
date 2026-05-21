@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta 
+        name="viewport" 
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Panel Administrador
+    </title>
+
+    <link 
+        rel="stylesheet" 
+        href="css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>
+            🛠️ Panel Administrador
+        </h1>
+
+    </header>
+
+    <!-- ESTADISTICAS -->
+
+    <section class="estadisticas">
+
+        <div class="estadistica-card">
+
+            <h3>
+                💰 Total vendido
+            </h3>
+
+            <p id="totalVendido">
+
+                $0
+
+            </p>
+
+        </div>
+
+        <div class="estadistica-card">
+
+            <h3>
+                📦 Pedidos
+            </h3>
+
+            <p id="totalPedidos">
+
+                0
+
+            </p>
+
+        </div>
+
+        <div class="estadistica-card">
+
+            <h3>
+                🌿 Plantas
+            </h3>
+
+            <p id="totalPlantas">
+
+                0
+
+            </p>
+
+        </div>
+
+        <div class="estadistica-card">
+
+            <h3>
+                🏆 Más vendido
+            </h3>
+
+            <p id="productoTop">
+
+                Ninguno
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- GRAFICAS -->
+
+    <section class="graficas">
+
+        <div class="grafica-card">
+
+            <h2>
+                📈 Ventas
+            </h2>
+
+            <canvas id="graficaVentas">
+
+            </canvas>
+
+        </div>
+
+    </section>
+
+    <main>
+
+        <!-- FORMULARIO -->
+
+        <section class="formulario">
+
+            <h2>
+                Agregar Planta
+            </h2>
+
+            <input
+                type="text"
+                id="nombre"
+                placeholder="Nombre de la planta"
+            >
+
+            <div class="grupo-precios">
+
+                <input
+                    type="number"
+                    id="costo"
+                    placeholder="Costo de la planta"
+                >
+
+                <input
+                    type="number"
+                    id="ganancia"
+                    placeholder="% de ganancia"
+                >
+
+            </div>
+
+            <input
+                type="number"
+                id="precio"
+                placeholder="Precio final"
+                readonly
+            >
+
+            <input
+                type="number"
+                id="stock"
+                placeholder="Cantidad disponible"
+            >
+
+            <textarea
+                id="descripcion"
+                placeholder="Descripción de la planta"
+            ></textarea>
+
+            <select id="riego">
+
+                <option value="">
+                    Tipo de riego
+                </option>
+
+                <option>
+                    Poco riego
+                </option>
+
+                <option>
+                    Riego moderado
+                </option>
+
+                <option>
+                    Riego frecuente
+                </option>
+
+            </select>
+
+            <select id="luz">
+
+                <option value="">
+                    Tipo de luz
+                </option>
+
+                <option>
+                    Sol
+                </option>
+
+                <option>
+                    Sombra
+                </option>
+
+                <option>
+                    Luz indirecta
+                </option>
+
+            </select>
+
+            <input
+                type="file"
+                id="imagen"
+                accept="image/*"
+            >
+
+            <img 
+                id="preview"
+                alt="Vista previa"
+            >
+
+            <button id="guardar">
+
+                Guardar Planta
+
+            </button>
+
+        </section>
+
+        <!-- INVENTARIO -->
+
+        <section class="inventario-admin">
+
+            <h2>
+                🌿 Inventario
+            </h2>
+
+            <div id="listaInventario">
+
+            </div>
+
+        </section>
+
+        <!-- PEDIDOS -->
+
+        <section class="pedidos-admin">
+
+            <h2>
+                📦 Pedidos realizados
+            </h2>
+
+            <div id="listaPedidos">
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="cloudinary.js"></script>
+
+    <script 
+        type="module"
+        src="js/app.js"
+    ></script>
+
+</body>
+</html>
