@@ -12,12 +12,6 @@ import {
 } from
 "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
-/* STRIPE */
-
-const stripe = Stripe(
-    "pk_test_51TZljrDgvnZjTIsjfco8dMzlMHszOd5tSbGz5uHhDZEuOBNcxDyfInkHX7f2byBzwttb9AC9TAlMDV1bMCwhsVTx00OKTM0ZJC"
-);
-
 /* VARIABLES */
 
 window.imagenURL = "";
@@ -543,7 +537,7 @@ window.eliminarProducto = function(index){
 
 };
 
-/* FINALIZAR COMPRA STRIPE */
+/* FINALIZAR COMPRA */
 
 const finalizarCompra =
 document.getElementById(
@@ -568,42 +562,104 @@ if(finalizarCompra){
 
             }
 
-            const response =
-            await fetch(
+            const usuario =
+            JSON.parse(
+                localStorage.getItem(
+                    "usuario"
+                )
+            );
 
-                "http://localhost:3000/crear-pago",
+            const ubicacion =
+            JSON.parse(
+                localStorage.getItem(
+                    "ubicacion"
+                )
+            );
+
+            let total = 0;
+
+            carritoProductos.forEach(
+                producto => {
+
+                    total +=
+                    Number(producto.precio);
+
+                }
+            );
+
+            await addDoc(
+
+                collection(db,"pedidos"),
 
                 {
 
-                    method:"POST",
+                    cliente:
+                    usuario?.nombre ||
+                    "Cliente",
 
-                    headers:{
+                    correo:
+                    usuario?.correo ||
+                    "Sin correo",
 
-                        "Content-Type":
-                        "application/json"
+                    ubicacion,
 
-                    },
+                    productos:
+                    carritoProductos,
 
-                    body:JSON.stringify({
+                    total,
 
-                        productos:
-                        carritoProductos
+                    estado:
+                    "Pendiente",
 
-                    })
+                    fecha:
+                    new Date()
+                    .toLocaleDateString()
 
                 }
 
             );
 
-            const session =
-            await response.json();
+            for(const producto of carritoProductos){
 
-            stripe.redirectToCheckout({
+                const nuevoStock =
 
-                sessionId:
-                session.id
+                producto.stock - 1;
 
-            });
+                await updateDoc(
+
+                    doc(
+                        db,
+                        "plantas",
+                        producto.id
+                    ),
+
+                    {
+
+                        stock:nuevoStock
+
+                    }
+
+                );
+
+            }
+
+            alert(
+                "Pedido realizado correctamente 🌿"
+            );
+
+            carritoProductos = [];
+
+            actualizarCarrito();
+
+            carrito.classList.remove(
+                "activo"
+            );
+
+            mostrarPlantas();
+
+            mostrarInventario();
+
+            mostrarPedidos();
 
         }
     );
@@ -908,7 +964,7 @@ async function(
     if(!nuevoPrecio) return;
 
     const nuevoStock =
-   prompt(
+    prompt(
         "Nuevo stock",
         stockActual
     );
