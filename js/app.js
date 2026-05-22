@@ -456,6 +456,7 @@ window.agregarCarrito = function(
     imagen,
     id,
     stock
+    
 
 ){
 
@@ -468,6 +469,13 @@ window.agregarCarrito = function(
         stock
 
     });
+    localStorage.setItem(
+
+    "carritoTemporal",
+
+    JSON.stringify(carritoProductos)
+
+);
 
     actualizarCarrito();
 
