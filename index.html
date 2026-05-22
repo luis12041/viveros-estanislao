@@ -11,7 +11,7 @@
     >
 
     <title>
-        Login
+        Viveros Estanislao
     </title>
 
     <link
@@ -19,31 +19,401 @@
         href="css/style.css"
     >
 
-    <!-- STRIPE -->
+    <style>
 
-    <script src="https://js.stripe.com/v3/"></script>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:
+            linear-gradient(
+                135deg,
+                #1b5e20,
+                #43a047,
+                #81c784
+            );
+            overflow:hidden;
+        }
+
+        .fondo{
+            position:absolute;
+            width:100%;
+            height:100%;
+            backdrop-filter:blur(4px);
+        }
+
+        .contenedor{
+            position:relative;
+            z-index:10;
+            width:100%;
+            max-width:420px;
+            padding:20px;
+        }
+
+        .login-card{
+            background:white;
+            border-radius:30px;
+            padding:40px 35px;
+            box-shadow:
+            0 20px 50px rgba(0,0,0,.25);
+            animation:entrada .5s ease;
+        }
+
+        @keyframes entrada{
+            from{
+                opacity:0;
+                transform:translateY(40px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        .logo{
+            text-align:center;
+            margin-bottom:10px;
+        }
+
+        .logo h1{
+            color:#2e7d32;
+            font-size:42px;
+            margin-bottom:10px;
+        }
+
+        .logo p{
+            color:#666;
+            font-size:15px;
+        }
+
+        .titulo{
+            text-align:center;
+            margin:30px 0;
+            color:#222;
+            font-size:32px;
+        }
+
+        .grupo{
+            margin-bottom:20px;
+        }
+
+        .grupo input{
+            width:100%;
+            padding:16px;
+            border-radius:15px;
+            border:2px solid #e0e0e0;
+            outline:none;
+            font-size:16px;
+            transition:.3s;
+        }
+
+        .grupo input:focus{
+            border-color:#2e7d32;
+            box-shadow:0 0 10px rgba(46,125,50,.2);
+        }
+
+        .btn-login{
+            width:100%;
+            padding:16px;
+            border:none;
+            border-radius:15px;
+            background:#2e7d32;
+            color:white;
+            font-size:18px;
+            cursor:pointer;
+            transition:.3s;
+            margin-top:10px;
+            font-weight:bold;
+        }
+
+        .btn-login:hover{
+            transform:translateY(-2px);
+            background:#1b5e20;
+        }
+
+        .acciones{
+            margin-top:25px;
+            display:flex;
+            flex-direction:column;
+            gap:15px;
+        }
+
+        .acciones button{
+            border:none;
+            background:none;
+            color:#2e7d32;
+            cursor:pointer;
+            font-size:15px;
+            font-weight:bold;
+        }
+
+        .modal{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,.6);
+            display:none;
+            justify-content:center;
+            align-items:center;
+            padding:20px;
+            z-index:999;
+        }
+
+        .modal.activo{
+            display:flex;
+        }
+
+        .modal-box{
+            background:white;
+            width:100%;
+            max-width:500px;
+            border-radius:30px;
+            padding:35px;
+            position:relative;
+            animation:entrada .3s ease;
+        }
+
+        .cerrar{
+            position:absolute;
+            top:20px;
+            right:25px;
+            font-size:30px;
+            cursor:pointer;
+            color:#777;
+        }
+
+        .modal-box h2{
+            text-align:center;
+            margin-bottom:30px;
+            color:#2e7d32;
+            font-size:32px;
+        }
+
+        .btn-ubicacion{
+            width:100%;
+            padding:15px;
+            border:none;
+            border-radius:15px;
+            background:#009688;
+            color:white;
+            font-size:16px;
+            cursor:pointer;
+            margin-bottom:20px;
+            font-weight:bold;
+        }
+
+        .btn-registro{
+            width:100%;
+            padding:16px;
+            border:none;
+            border-radius:15px;
+            background:#2e7d32;
+            color:white;
+            font-size:18px;
+            cursor:pointer;
+            margin-top:10px;
+            font-weight:bold;
+        }
+
+        .mensaje{
+            text-align:center;
+            margin-top:20px;
+            color:#666;
+            font-size:14px;
+        }
+
+        @media(max-width:500px){
+
+            .login-card{
+                padding:30px 25px;
+            }
+
+            .modal-box{
+                padding:30px 20px;
+            }
+
+            .logo h1{
+                font-size:34px;
+            }
+
+        }
+
+    
+
+        .mostrar-password{
+            position:relative;
+        }
+
+        .mostrar-password span{
+            position:absolute;
+            right:18px;
+            top:50%;
+            transform:translateY(-50%);
+            cursor:pointer;
+            color:#777;
+            font-size:14px;
+            font-weight:bold;
+        }
+
+        .loader{
+            width:22px;
+            height:22px;
+            border:3px solid rgba(255,255,255,.4);
+            border-top:3px solid white;
+            border-radius:50%;
+            animation:girar 1s linear infinite;
+            margin:auto;
+            display:none;
+        }
+
+        @keyframes girar{
+            from{
+                transform:rotate(0deg);
+            }
+            to{
+                transform:rotate(360deg);
+            }
+        }
+
+        .fondo-plantas{
+            position:absolute;
+            inset:0;
+            background:url('https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=1600&auto=format&fit=crop') center/cover;
+            filter:blur(6px);
+            transform:scale(1.1);
+            opacity:.35;
+        }
+
+    </style>
 
 </head>
 
 <body>
 
-    <div class="login-container">
+    <div class="fondo"></div>
 
-        <div class="login-box">
+    <div class="fondo-plantas"></div>
 
-            <h1>
-                🌿 Viveros Estanislao
-            </h1>
+    <div class="contenedor">
 
-            <h2>
+        <div class="login-card">
+
+            <div class="logo">
+
+                <h1>
+                    🌿
+                </h1>
+
+                <h1>
+                    Viveros Estanislao
+                </h1>
+
+                <p>
+                    Plantas para interior y exterior
+                </p>
+
+            </div>
+
+            <h2 class="titulo">
                 Iniciar Sesión
             </h2>
 
-            <input
-                type="text"
-                id="nombre"
-                placeholder="Nombre completo"
+            <div class="grupo">
+
+                <input
+                    type="email"
+                    id="correoLogin"
+                    placeholder="Correo electrónico"
+                >
+
+            </div>
+
+            <div class="grupo mostrar-password">
+
+                <input
+                    type="password"
+                    id="passwordLogin"
+                    placeholder="Contraseña"
+                >
+
+                <span id="verPasswordLogin">
+                    Ver
+                </span>
+
+            </div>
+
+            <button
+                id="btnLogin"
+                class="btn-login"
             >
+
+                <span id="textoLogin">
+                    Entrar
+                </span>
+
+                <div id="loaderLogin" class="loader"></div>
+
+            </button>
+
+            <div class="acciones">
+
+                <button id="abrirRegistro">
+
+                    Crear cuenta nueva
+
+                </button>
+
+                <button id="btnRecuperar">
+
+                    Olvidé mi contraseña
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- MODAL REGISTRO -->
+
+    <div
+        class="modal"
+        id="modalRegistro"
+    >
+
+        <div class="modal-box">
+
+            <span
+                class="cerrar"
+                id="cerrarRegistro"
+            >
+                ×
+            </span>
+
+            <h2>
+                Crear Cuenta
+            </h2>
+
+            <div class="grupo">
+
+                <input
+                    type="text"
+                    id="nombreRegistro"
+                    placeholder="Nombre completo"
+                >
+
+            </div>
 
             <button
                 id="btnUbicacion"
@@ -54,56 +424,226 @@
 
             </button>
 
-            <input
-                type="email"
-                id="correo"
-                placeholder="Correo electrónico"
-            >
+            <div class="grupo">
 
-            <input
-                type="password"
-                id="password"
-                placeholder="Contraseña"
-            >
+                <input
+                    type="email"
+                    id="correoRegistro"
+                    placeholder="Correo electrónico"
+                >
 
-            <button id="btnLogin">
+            </div>
 
-                Entrar
+            <div class="grupo mostrar-password">
 
-            </button>
+                <input
+                    type="password"
+                    id="passwordRegistro"
+                    placeholder="Contraseña"
+                >
+
+                <span id="verPasswordRegistro">
+                    Ver
+                </span>
+
+            </div>
 
             <button
                 id="btnRegistro"
-                class="btn-secundario"
+                class="btn-registro"
             >
 
-                Crear cuenta
+                Registrarme
 
             </button>
 
-            <button
-                id="btnRecuperar"
-                class="btn-recuperar"
-            >
-
-                Olvidé mi contraseña
-
-            </button>
+            <p class="mensaje">
+                Tu cuenta quedará registrada en Firebase 🔥
+            </p>
 
         </div>
 
     </div>
+
+    <script>
+
+        const modalRegistro =
+        document.getElementById(
+            "modalRegistro"
+        );
+
+        const abrirRegistro =
+        document.getElementById(
+            "abrirRegistro"
+        );
+
+        const cerrarRegistro =
+        document.getElementById(
+            "cerrarRegistro"
+        );
+
+        abrirRegistro.addEventListener(
+            "click",
+            () => {
+
+                modalRegistro.classList.add(
+                    "activo"
+                );
+
+            }
+        );
+
+        cerrarRegistro.addEventListener(
+            "click",
+            () => {
+
+                modalRegistro.classList.remove(
+                    "activo"
+                );
+
+            }
+        );
+
+        window.addEventListener(
+            "click",
+            e => {
+
+                if(
+                    e.target === modalRegistro
+                ){
+
+                    modalRegistro.classList.remove(
+                        "activo"
+                    );
+
+                }
+
+            }
+        );
+
+        const passwordLogin =
+        document.getElementById(
+            "passwordLogin"
+        );
+
+        const verPasswordLogin =
+        document.getElementById(
+            "verPasswordLogin"
+        );
+
+        verPasswordLogin.addEventListener(
+            "click",
+            () => {
+
+                if(
+                    passwordLogin.type ===
+                    "password"
+                ){
+
+                    passwordLogin.type =
+                    "text";
+
+                    verPasswordLogin.innerText =
+                    "Ocultar";
+
+                }else{
+
+                    passwordLogin.type =
+                    "password";
+
+                    verPasswordLogin.innerText =
+                    "Ver";
+
+                }
+
+            }
+        );
+
+        const passwordRegistro =
+        document.getElementById(
+            "passwordRegistro"
+        );
+
+        const verPasswordRegistro =
+        document.getElementById(
+            "verPasswordRegistro"
+        );
+
+        verPasswordRegistro.addEventListener(
+            "click",
+            () => {
+
+                if(
+                    passwordRegistro.type ===
+                    "password"
+                ){
+
+                    passwordRegistro.type =
+                    "text";
+
+                    verPasswordRegistro.innerText =
+                    "Ocultar";
+
+                }else{
+
+                    passwordRegistro.type =
+                    "password";
+
+                    verPasswordRegistro.innerText =
+                    "Ver";
+
+                }
+
+            }
+        );
+
+        const btnLogin =
+        document.getElementById(
+            "btnLogin"
+        );
+
+        btnLogin.addEventListener(
+            "click",
+            () => {
+
+                document.getElementById(
+                    "textoLogin"
+                ).style.display =
+                "none";
+
+                document.getElementById(
+                    "loaderLogin"
+                ).style.display =
+                "block";
+
+                setTimeout(() => {
+
+                    document.getElementById(
+                        "textoLogin"
+                    ).style.display =
+                    "block";
+
+                    document.getElementById(
+                        "loaderLogin"
+                    ).style.display =
+                    "none";
+
+                },1500);
+
+            }
+        );
+
+        localStorage.setItem(
+            "sesionActiva",
+            "true"
+        );
+
+    </script>
 
     <script
         type="module"
         src="js/login.js"
     ></script>
 
-    <script
-        type="module"
-        src="js/stripe.js"
-    ></script>
-
 </body>
-
 </html>

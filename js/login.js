@@ -136,10 +136,30 @@ btnLogin.addEventListener(
         }
 
         const correo =
-        document.getElementById("correo").value;
+        document.getElementById(
+            "correoLogin"
+        ).value;
 
         const password =
-        document.getElementById("password").value;
+        document.getElementById(
+            "passwordLogin"
+        ).value;
+
+        const textoLogin =
+        document.getElementById(
+            "textoLogin"
+        );
+
+        const loaderLogin =
+        document.getElementById(
+            "loaderLogin"
+        );
+
+        textoLogin.style.display =
+        "none";
+
+        loaderLogin.style.display =
+        "block";
 
         try{
 
@@ -153,6 +173,19 @@ btnLogin.addEventListener(
 
             intentos = 0;
 
+            localStorage.setItem(
+                "sesionActiva",
+                "true"
+            );
+
+            localStorage.setItem(
+
+                "correoActivo",
+
+                correo
+
+            );
+
             if(
                 correo ===
                 "admin@vivero.com"
@@ -163,11 +196,18 @@ btnLogin.addEventListener(
 
             }else{
 
-               window.location.href = "catalogo.html";
+                window.location.href =
+                "catalogo.html";
 
             }
 
         }catch(error){
+
+            textoLogin.style.display =
+            "block";
+
+            loaderLogin.style.display =
+            "none";
 
             intentos++;
 
@@ -205,13 +245,35 @@ btnRegistro.addEventListener(
     async () => {
 
         const nombre =
-        document.getElementById("nombre").value;
+        document.getElementById(
+            "nombreRegistro"
+        ).value;
 
         const correo =
-        document.getElementById("correo").value;
+        document.getElementById(
+            "correoRegistro"
+        ).value;
 
         const password =
-        document.getElementById("password").value;
+        document.getElementById(
+            "passwordRegistro"
+        ).value;
+
+        if(
+
+            nombre === "" ||
+            correo === "" ||
+            password === ""
+
+        ){
+
+            alert(
+                "Completa todos los campos"
+            );
+
+            return;
+
+        }
 
         try{
 
@@ -244,6 +306,20 @@ btnRegistro.addEventListener(
                 "Cuenta creada correctamente 🌿"
             );
 
+            document.getElementById(
+                "modalRegistro"
+            ).classList.remove(
+                "activo"
+            );
+
+            document.getElementById(
+                "correoLogin"
+            ).value = correo;
+
+            document.getElementById(
+                "passwordLogin"
+            ).value = password;
+
         }catch(error){
 
             alert(
@@ -262,7 +338,9 @@ btnRecuperar.addEventListener(
     async () => {
 
         const correo =
-        document.getElementById("correo").value;
+        document.getElementById(
+            "correoLogin"
+        ).value;
 
         if(correo === ""){
 
@@ -297,3 +375,40 @@ btnRecuperar.addEventListener(
 
     }
 );
+
+/* SESION ACTIVA */
+
+const sesionActiva =
+localStorage.getItem(
+    "sesionActiva"
+);
+
+const correoActivo =
+localStorage.getItem(
+    "correoActivo"
+);
+
+if(
+
+    sesionActiva === "true" &&
+
+    correoActivo !== null
+
+){
+
+    if(
+        correoActivo ===
+        "admin@vivero.com"
+    ){
+
+        window.location.href =
+        "admin.html";
+
+    }else{
+
+        window.location.href =
+        "catalogo.html";
+
+    }
+
+}
