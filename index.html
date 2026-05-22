@@ -33,79 +33,101 @@
             display:flex;
             justify-content:center;
             align-items:center;
-            background:
-            linear-gradient(
-                135deg,
-                #1b5e20,
-                #43a047,
-                #81c784
-            );
             overflow:hidden;
+            position:relative;
         }
 
-        .fondo{
+        .fondo-plantas{
             position:absolute;
-            width:100%;
-            height:100%;
-            backdrop-filter:blur(4px);
+            inset:0;
+            background:
+            linear-gradient(
+                rgba(0,0,0,.45),
+                rgba(0,0,0,.45)
+            ),
+            url('https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=1600&auto=format&fit=crop');
+            background-size:cover;
+            background-position:center;
         }
 
         .contenedor{
             position:relative;
             z-index:10;
             width:100%;
-            max-width:420px;
+            max-width:430px;
             padding:20px;
         }
 
         .login-card{
-            background:white;
+
+            background:rgba(255,255,255,.95);
+
+            backdrop-filter:blur(10px);
+
             border-radius:30px;
+
             padding:40px 35px;
+
             box-shadow:
-            0 20px 50px rgba(0,0,0,.25);
+            0 20px 50px rgba(0,0,0,.35);
+
             animation:entrada .5s ease;
+
         }
 
         @keyframes entrada{
+
             from{
                 opacity:0;
                 transform:translateY(40px);
             }
+
             to{
                 opacity:1;
                 transform:translateY(0);
             }
+
         }
 
         .logo{
+
             text-align:center;
-            margin-bottom:10px;
+            margin-bottom:20px;
+
         }
 
         .logo h1{
+
             color:#2e7d32;
             font-size:42px;
             margin-bottom:10px;
+
         }
 
         .logo p{
-            color:#666;
+
+            color:#555;
             font-size:15px;
+
         }
 
         .titulo{
+
             text-align:center;
-            margin:30px 0;
+            margin-bottom:30px;
             color:#222;
-            font-size:32px;
+            font-size:34px;
+
         }
 
         .grupo{
+
             margin-bottom:20px;
+
         }
 
         .grupo input{
+
             width:100%;
             padding:16px;
             border-radius:15px;
@@ -113,185 +135,292 @@
             outline:none;
             font-size:16px;
             transition:.3s;
+
         }
 
         .grupo input:focus{
+
             border-color:#2e7d32;
-            box-shadow:0 0 10px rgba(46,125,50,.2);
+
+            box-shadow:
+            0 0 10px rgba(46,125,50,.2);
+
+        }
+
+        .mostrar-password{
+
+            position:relative;
+
+        }
+
+        .mostrar-password span{
+
+            position:absolute;
+
+            right:18px;
+
+            top:50%;
+
+            transform:translateY(-50%);
+
+            cursor:pointer;
+
+            color:#666;
+
+            font-size:14px;
+
+            font-weight:bold;
+
         }
 
         .btn-login{
+
             width:100%;
+
             padding:16px;
+
             border:none;
+
             border-radius:15px;
+
             background:#2e7d32;
+
             color:white;
+
             font-size:18px;
+
             cursor:pointer;
+
             transition:.3s;
-            margin-top:10px;
+
             font-weight:bold;
+
         }
 
         .btn-login:hover{
-            transform:translateY(-2px);
+
             background:#1b5e20;
+
+            transform:translateY(-2px);
+
         }
 
         .acciones{
+
             margin-top:25px;
+
             display:flex;
+
             flex-direction:column;
+
             gap:15px;
+
         }
 
         .acciones button{
+
             border:none;
+
             background:none;
+
             color:#2e7d32;
+
             cursor:pointer;
+
             font-size:15px;
+
             font-weight:bold;
+
         }
 
         .modal{
+
             position:fixed;
+
             top:0;
+
             left:0;
+
             width:100%;
+
             height:100%;
-            background:rgba(0,0,0,.6);
+
+            background:rgba(0,0,0,.65);
+
             display:none;
+
             justify-content:center;
+
             align-items:center;
-            padding:20px;
+
             z-index:999;
+
+            padding:20px;
+
         }
 
         .modal.activo{
+
             display:flex;
+
         }
 
         .modal-box{
+
             background:white;
+
             width:100%;
+
             max-width:500px;
+
             border-radius:30px;
+
             padding:35px;
+
             position:relative;
+
             animation:entrada .3s ease;
+
         }
 
         .cerrar{
+
             position:absolute;
-            top:20px;
+
+            top:18px;
+
             right:25px;
-            font-size:30px;
+
+            font-size:32px;
+
             cursor:pointer;
-            color:#777;
+
+            color:#666;
+
         }
 
         .modal-box h2{
+
             text-align:center;
+
             margin-bottom:30px;
+
             color:#2e7d32;
+
             font-size:32px;
+
         }
 
         .btn-ubicacion{
+
             width:100%;
+
             padding:15px;
+
             border:none;
+
             border-radius:15px;
+
             background:#009688;
+
             color:white;
+
             font-size:16px;
+
             cursor:pointer;
+
             margin-bottom:20px;
+
             font-weight:bold;
+
         }
 
         .btn-registro{
+
             width:100%;
+
             padding:16px;
+
             border:none;
+
             border-radius:15px;
+
             background:#2e7d32;
+
             color:white;
+
             font-size:18px;
+
             cursor:pointer;
-            margin-top:10px;
+
             font-weight:bold;
+
         }
 
         .mensaje{
+
             text-align:center;
+
             margin-top:20px;
+
             color:#666;
+
             font-size:14px;
+
+        }
+
+        .loader{
+
+            width:22px;
+
+            height:22px;
+
+            border:3px solid rgba(255,255,255,.4);
+
+            border-top:3px solid white;
+
+            border-radius:50%;
+
+            animation:girar 1s linear infinite;
+
+            margin:auto;
+
+            display:none;
+
+        }
+
+        @keyframes girar{
+
+            from{
+                transform:rotate(0deg);
+            }
+
+            to{
+                transform:rotate(360deg);
+            }
+
         }
 
         @media(max-width:500px){
 
             .login-card{
+
                 padding:30px 25px;
+
             }
 
             .modal-box{
+
                 padding:30px 20px;
+
             }
 
             .logo h1{
+
                 font-size:34px;
+
             }
 
-        }
-
-    
-
-        .mostrar-password{
-            position:relative;
-        }
-
-        .mostrar-password span{
-            position:absolute;
-            right:18px;
-            top:50%;
-            transform:translateY(-50%);
-            cursor:pointer;
-            color:#777;
-            font-size:14px;
-            font-weight:bold;
-        }
-
-        .loader{
-            width:22px;
-            height:22px;
-            border:3px solid rgba(255,255,255,.4);
-            border-top:3px solid white;
-            border-radius:50%;
-            animation:girar 1s linear infinite;
-            margin:auto;
-            display:none;
-        }
-
-        @keyframes girar{
-            from{
-                transform:rotate(0deg);
-            }
-            to{
-                transform:rotate(360deg);
-            }
-        }
-
-        .fondo-plantas{
-            position:absolute;
-            inset:0;
-            background:url('https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=1600&auto=format&fit=crop') center/cover;
-            filter:blur(6px);
-            transform:scale(1.1);
-            opacity:.35;
         }
 
     </style>
@@ -299,8 +428,6 @@
 </head>
 
 <body>
-
-    <div class="fondo"></div>
 
     <div class="fondo-plantas"></div>
 
@@ -311,11 +438,7 @@
             <div class="logo">
 
                 <h1>
-                    🌿
-                </h1>
-
-                <h1>
-                    Viveros Estanislao
+                    🌿 Viveros Estanislao
                 </h1>
 
                 <p>
@@ -361,7 +484,10 @@
                     Entrar
                 </span>
 
-                <div id="loaderLogin" class="loader"></div>
+                <div
+                    id="loaderLogin"
+                    class="loader"
+                ></div>
 
             </button>
 
@@ -385,7 +511,7 @@
 
     </div>
 
-    <!-- MODAL REGISTRO -->
+    <!-- MODAL -->
 
     <div
         class="modal"
@@ -398,7 +524,9 @@
                 class="cerrar"
                 id="cerrarRegistro"
             >
+
                 ×
+
             </span>
 
             <h2>
@@ -458,7 +586,9 @@
             </button>
 
             <p class="mensaje">
-                Tu cuenta quedará registrada en Firebase 🔥
+
+                Tu cuenta quedará registrada 🔥
+
             </p>
 
         </div>
@@ -597,46 +727,42 @@
             }
         );
 
-        const btnLogin =
-        document.getElementById(
-            "btnLogin"
+        const sesionActiva =
+
+        localStorage.getItem(
+            "sesionActiva"
         );
 
-        btnLogin.addEventListener(
-            "click",
-            () => {
+        const correoActivo =
 
-                document.getElementById(
-                    "textoLogin"
-                ).style.display =
-                "none";
+        localStorage.getItem(
+            "correoActivo"
+        );
 
-                document.getElementById(
-                    "loaderLogin"
-                ).style.display =
-                "block";
+        if(
 
-                setTimeout(() => {
+            sesionActiva === "true"
 
-                    document.getElementById(
-                        "textoLogin"
-                    ).style.display =
-                    "block";
+        ){
 
-                    document.getElementById(
-                        "loaderLogin"
-                    ).style.display =
-                    "none";
+            if(
 
-                },1500);
+                correoActivo ===
+                "admin@vivero.com"
+
+            ){
+
+                window.location.href =
+                "admin.html";
+
+            }else{
+
+                window.location.href =
+                "catalogo.html";
 
             }
-        );
 
-        localStorage.setItem(
-            "sesionActiva",
-            "true"
-        );
+        }
 
     </script>
 
@@ -644,45 +770,6 @@
         type="module"
         src="js/login.js"
     ></script>
-<script>
 
-    const sesionActiva =
-
-    localStorage.getItem(
-        "sesionActiva"
-    );
-
-    const correoActivo =
-
-    localStorage.getItem(
-        "correoActivo"
-    );
-
-    if(
-
-        sesionActiva === "true"
-
-    ){
-
-        if(
-
-            correoActivo ===
-            "admin@vivero.com"
-
-        ){
-
-            window.location.href =
-            "admin.html";
-
-        }else{
-
-            window.location.href =
-            "catalogo.html";
-
-        }
-
-    }
-
-</script>
 </body>
 </html>
