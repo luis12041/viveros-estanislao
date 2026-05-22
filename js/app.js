@@ -67,7 +67,17 @@ document.getElementById("filtroRiego");
 const cerrarSesion =
 document.getElementById("cerrarSesion");
 
-let carritoProductos = [];
+let carritoProductos =
+
+JSON.parse(
+
+    localStorage.getItem(
+        "carritoTemporal"
+    )
+
+) || [];
+
+actualizarCarrito();
 
 /* CERRAR SESION */
 
@@ -575,6 +585,14 @@ function actualizarCarrito(){
 window.eliminarProducto = function(index){
 
     carritoProductos.splice(index,1);
+
+    localStorage.setItem(
+
+        "carritoTemporal",
+
+        JSON.stringify(carritoProductos)
+
+    );
 
     actualizarCarrito();
 

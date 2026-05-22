@@ -644,6 +644,45 @@
         type="module"
         src="js/login.js"
     ></script>
+<script>
 
+    const sesionActiva =
+
+    localStorage.getItem(
+        "sesionActiva"
+    );
+
+    const correoActivo =
+
+    localStorage.getItem(
+        "correoActivo"
+    );
+
+    if(
+
+        sesionActiva === "true"
+
+    ){
+
+        if(
+
+            correoActivo ===
+            "admin@vivero.com"
+
+        ){
+
+            window.location.href =
+            "admin.html";
+
+        }else{
+
+            window.location.href =
+            "catalogo.html";
+
+        }
+
+    }
+
+</script>
 </body>
 </html>
