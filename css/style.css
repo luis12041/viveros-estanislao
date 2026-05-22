@@ -1031,3 +1031,38 @@ header{
     cursor:pointer;
 
 }
+.btn-cerrar{
+
+    position:absolute;
+
+    top:20px;
+
+    right:20px;
+
+    background:#c62828;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 18px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+    z-index:999;
+
+}
+
+.btn-cerrar:hover{
+
+    background:#8e0000;
+
+    transform:scale(1.05);
+
+}

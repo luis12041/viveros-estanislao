@@ -64,7 +64,42 @@ document.getElementById("filtroLuz");
 const filtroRiego =
 document.getElementById("filtroRiego");
 
+const cerrarSesion =
+document.getElementById("cerrarSesion");
+
 let carritoProductos = [];
+
+/* CERRAR SESION */
+
+if(cerrarSesion){
+
+    cerrarSesion.addEventListener(
+        "click",
+        () => {
+
+            localStorage.removeItem(
+                "sesionActiva"
+            );
+
+            localStorage.removeItem(
+                "correoActivo"
+            );
+
+            localStorage.removeItem(
+                "usuario"
+            );
+
+            localStorage.removeItem(
+                "carritoTemporal"
+            );
+
+            window.location.href =
+            "index.html";
+
+        }
+    );
+
+}
 
 /* CALCULAR PRECIO */
 
@@ -456,7 +491,6 @@ window.agregarCarrito = function(
     imagen,
     id,
     stock
-    
 
 ){
 
@@ -469,13 +503,14 @@ window.agregarCarrito = function(
         stock
 
     });
+
     localStorage.setItem(
 
-    "carritoTemporal",
+        "carritoTemporal",
 
-    JSON.stringify(carritoProductos)
+        JSON.stringify(carritoProductos)
 
-);
+    );
 
     actualizarCarrito();
 
