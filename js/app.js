@@ -74,6 +74,37 @@ const cerrarSesion =
 document.getElementById("cerrarSesion");
 
 /* =========================
+USUARIO CONECTADO
+========================= */
+
+const usuarioGuardado =
+
+JSON.parse(
+
+    localStorage.getItem(
+        "usuario"
+    )
+
+);
+
+if(
+
+    usuarioGuardado &&
+    document.getElementById(
+        "saludoUsuario"
+    )
+
+){
+
+    document.getElementById(
+        "saludoUsuario"
+    ).innerHTML =
+
+    `👋 Hola ${usuarioGuardado.nombre}`;
+
+}
+
+/* =========================
 CARRITO
 ========================= */
 
@@ -727,73 +758,6 @@ window.eliminarProducto = function(index){
 };
 
 /* =========================
-MODAL
-========================= */
-
-window.abrirModal = function(
-
-    nombre,
-    precio,
-    descripcion,
-    riego,
-    luz,
-    imagen
-
-){
-
-    const modal =
-    document.createElement("div");
-
-    modal.classList.add("modal");
-
-    modal.innerHTML = `
-
-        <div class="modal-contenido">
-
-            <span class="cerrar">
-
-                &times;
-
-            </span>
-
-            <img src="${imagen}">
-
-            <h2>
-                ${nombre}
-            </h2>
-
-            <p class="precio">
-                $${precio}
-            </p>
-
-            <p>
-                ${descripcion}
-            </p>
-
-            <p>
-                💧 ${riego}
-            </p>
-
-            <p>
-                ☀️ ${luz}
-            </p>
-
-        </div>
-
-    `;
-
-    document.body.appendChild(modal);
-
-    modal.querySelector(".cerrar")
-    .addEventListener("click", () => {
-
-        modal.remove();
-
-    });
-
-};
-
-/* =========================
 PEDIDOS
 ========================= */
 
@@ -1058,3 +1022,127 @@ async function(
     mostrarPlantas();
 
 };
+
+/* =========================
+CATEGORIAS
+========================= */
+
+const botonesCategorias =
+
+document.querySelectorAll(
+    ".categoria-btn"
+);
+
+botonesCategorias.forEach(btn => {
+
+    btn.addEventListener(
+        "click",
+        async () => {
+
+            botonesCategorias.forEach(b => {
+
+                b.classList.remove(
+                    "activa"
+                );
+
+            });
+
+            btn.classList.add(
+                "activa"
+            );
+
+            const categoria =
+
+            btn.innerText
+            .trim();
+
+            const querySnapshot =
+            await getDocs(
+                collection(db,"plantas")
+            );
+
+            const plantas = [];
+
+            querySnapshot.forEach(doc => {
+
+                plantas.push({
+
+                    id:doc.id,
+
+                    ...doc.data()
+
+                });
+
+            });
+
+            if(
+
+                categoria.includes(
+                    "Todas"
+                )
+
+            ){
+
+                renderizarPlantas(
+                    plantas
+                );
+
+                return;
+
+            }
+
+            const filtradas =
+
+            plantas.filter(planta => {
+
+                if(
+
+                    categoria.includes(
+                        "Sol"
+                    )
+
+                ){
+
+                    return planta.luz === "Sol";
+
+                }
+
+                if(
+
+                    categoria.includes(
+                        "Sombra"
+                    )
+
+                ){
+
+                    return planta.luz === "Sombra";
+
+                }
+
+                if(
+
+                    categoria.includes(
+                        "Resolana"
+                    )
+
+                ){
+
+                    return (
+
+                        planta.luz ===
+                        "Luz indirecta"
+
+                    );
+
+                }
+
+            });
+
+            renderizarPlantas(
+                filtradas
+            );
+
+        }
+    );
+
+});
