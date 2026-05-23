@@ -83,11 +83,6 @@ document.getElementById(
     "btnUbicacion"
 );
 
-const btnCerrarSesion =
-document.getElementById(
-    "cerrarSesion"
-);
-
 /* =========================
 SEGURIDAD
 ========================= */
@@ -115,7 +110,7 @@ localStorage.getItem(
 const paginaActual =
 window.location.pathname;
 
-/* SI YA HAY SESION EN LOGIN */
+/* SI YA HAY SESION */
 
 if(
 
@@ -145,45 +140,6 @@ if(
         );
 
     }
-
-}
-
-/* =========================
-CERRAR SESION
-========================= */
-
-if(btnCerrarSesion){
-
-    btnCerrarSesion.addEventListener(
-        "click",
-        () => {
-
-            /* BORRAR SESION */
-
-            localStorage.removeItem(
-                "sesionActiva"
-            );
-
-            localStorage.removeItem(
-                "correoActivo"
-            );
-
-            localStorage.removeItem(
-                "usuario"
-            );
-
-            localStorage.removeItem(
-                "carritoTemporal"
-            );
-
-            /* REDIRIGIR */
-
-            window.location.replace(
-                "index.html"
-            );
-
-        }
-    );
 
 }
 
@@ -356,7 +312,7 @@ if(btnLogin){
 
                 );
 
-                /* ADMIN */
+                /* REDIRECCION */
 
                 if(
                     correo ===
@@ -475,8 +431,6 @@ if(btnRegistro){
 
                 );
 
-                /* GUARDAR NOMBRE */
-
                 await updateProfile(
 
                     userCredential.user,
@@ -488,8 +442,6 @@ if(btnRegistro){
                     }
 
                 );
-
-                /* LOCAL */
 
                 localStorage.setItem(
 

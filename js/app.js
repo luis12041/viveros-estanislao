@@ -254,21 +254,11 @@ if(cerrarSesion){
         "click",
         () => {
 
-            sessionStorage.removeItem(
-                "sesionActiva"
-            );
+            /* LIMPIAR TODO */
 
-            sessionStorage.removeItem(
-                "correoActivo"
-            );
+            localStorage.clear();
 
-            localStorage.removeItem(
-                "usuario"
-            );
-
-            localStorage.removeItem(
-                "carritoTemporal"
-            );
+            sessionStorage.clear();
 
             mostrarToast(
                 "Sesión cerrada 👋"
@@ -276,10 +266,11 @@ if(cerrarSesion){
 
             setTimeout(() => {
 
-                window.location.href =
-                "index.html";
+                window.location.replace(
+                    "index.html"
+                );
 
-            },1000);
+            },500);
 
         }
     );
