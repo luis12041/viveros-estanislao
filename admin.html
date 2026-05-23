@@ -21,41 +21,68 @@
 
 </head>
 
-<body>
+<body class="admin-body">
 
     <!-- SIDEBAR -->
 
-    <aside class="sidebar">
+    <aside class="sidebar-admin">
 
-        <h2>
-            🌿 Admin
-        </h2>
+        <div class="logo-admin">
 
-        <button onclick="mostrarSeccion('dashboard')">
+            <h2>
+                🌿 Viveros
+            </h2>
 
-            📊 Dashboard
+            <p>
+                Panel Administrativo
+            </p>
 
-        </button>
+        </div>
 
-        <button onclick="mostrarSeccion('productos')">
+        <nav class="menu-admin">
 
-            🌿 Productos
+            <button 
+                class="menu-btn activo"
+                onclick="mostrarSeccion('dashboard',this)"
+            >
 
-        </button>
+                📊 Dashboard
 
-        <button onclick="mostrarSeccion('agregar')">
+            </button>
 
-            ➕ Agregar Planta
+            <button 
+                class="menu-btn"
+                onclick="mostrarSeccion('productos',this)"
+            >
 
-        </button>
+                🌿 Inventario
 
-        <button onclick="mostrarSeccion('pedidos')">
+            </button>
 
-            📦 Pedidos
+            <button 
+                class="menu-btn"
+                onclick="mostrarSeccion('agregar',this)"
+            >
 
-        </button>
+                ➕ Agregar Planta
 
-        <button id="cerrarSesion" class="btn-cerrar">
+            </button>
+
+            <button 
+                class="menu-btn"
+                onclick="mostrarSeccion('pedidos',this)"
+            >
+
+                📦 Pedidos
+
+            </button>
+
+        </nav>
+
+        <button 
+            id="cerrarSesion"
+            class="btn-logout"
+        >
 
             🚪 Cerrar sesión
 
@@ -65,13 +92,23 @@
 
     <!-- CONTENIDO -->
 
-    <div class="contenido-admin">
+    <main class="contenido-admin-pro">
 
-        <header>
+        <!-- HEADER -->
 
-            <h1>
-                🛠️ Panel Administrador
-            </h1>
+        <header class="top-admin">
+
+            <div>
+
+                <h1>
+                    👋 Bienvenido Administrador
+                </h1>
+
+                <p>
+                    Gestiona tu vivero de manera profesional
+                </p>
+
+            </div>
 
         </header>
 
@@ -82,81 +119,126 @@
             class="seccion-admin activa"
         >
 
-            <section class="estadisticas">
+            <div class="cards-dashboard">
 
-                <div class="estadistica-card">
+                <div class="card-dashboard">
 
-                    <h3>
-                        💰 Total vendido
-                    </h3>
+                    <span>
+                        💰
+                    </span>
 
-                    <p id="totalVendido">
+                    <div>
 
-                        $0
+                        <h3>
+                            Total vendido
+                        </h3>
 
-                    </p>
+                        <p id="totalVendido">
+                            $0
+                        </p>
 
-                </div>
-
-                <div class="estadistica-card">
-
-                    <h3>
-                        📦 Pedidos
-                    </h3>
-
-                    <p id="totalPedidos">
-
-                        0
-
-                    </p>
+                    </div>
 
                 </div>
 
-                <div class="estadistica-card">
+                <div class="card-dashboard">
 
-                    <h3>
-                        🌿 Plantas
-                    </h3>
+                    <span>
+                        📦
+                    </span>
 
-                    <p id="totalPlantas">
+                    <div>
 
-                        0
+                        <h3>
+                            Pedidos
+                        </h3>
 
-                    </p>
+                        <p id="totalPedidos">
+                            0
+                        </p>
 
-                </div>
-
-                <div class="estadistica-card">
-
-                    <h3>
-                        🏆 Más vendido
-                    </h3>
-
-                    <p id="productoTop">
-
-                        Ninguno
-
-                    </p>
+                    </div>
 
                 </div>
 
-            </section>
+                <div class="card-dashboard">
 
-            <section class="graficas">
+                    <span>
+                        🌿
+                    </span>
 
-                <div class="grafica-card">
+                    <div>
 
-                    <h2>
-                        📈 Ventas
-                    </h2>
+                        <h3>
+                            Plantas
+                        </h3>
 
-                    <canvas id="graficaVentas">
+                        <p id="totalPlantas">
+                            0
+                        </p>
 
-                    </canvas>
+                    </div>
 
                 </div>
 
-            </section>
+                <div class="card-dashboard">
+
+                    <span>
+                        🏆
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Más vendido
+                        </h3>
+
+                        <p id="productoTop">
+                            Ninguno
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="grafica-pro">
+
+                <h2>
+                    📈 Reporte de Ventas
+                </h2>
+
+                <canvas id="graficaVentas">
+
+                </canvas>
+
+            </div>
+
+        </section>
+
+        <!-- INVENTARIO -->
+
+        <section 
+            id="productos"
+            class="seccion-admin"
+        >
+
+            <div class="titulo-seccion">
+
+                <h2>
+                    🌿 Inventario
+                </h2>
+
+                <p>
+                    Administra las plantas registradas
+                </p>
+
+            </div>
+
+            <div id="listaInventario">
+
+            </div>
 
         </section>
 
@@ -167,10 +249,10 @@
             class="seccion-admin"
         >
 
-            <section class="formulario">
+            <div class="formulario-pro">
 
                 <h2>
-                    Agregar Planta
+                    ➕ Agregar nueva planta
                 </h2>
 
                 <input
@@ -184,13 +266,13 @@
                     <input
                         type="number"
                         id="costo"
-                        placeholder="Costo de la planta"
+                        placeholder="Costo"
                     >
 
                     <input
                         type="number"
                         id="ganancia"
-                        placeholder="% de ganancia"
+                        placeholder="% Ganancia"
                     >
 
                 </div>
@@ -205,7 +287,7 @@
                 <input
                     type="number"
                     id="stock"
-                    placeholder="Cantidad disponible"
+                    placeholder="Stock"
                 >
 
                 <textarea
@@ -270,28 +352,7 @@
 
                 </button>
 
-            </section>
-
-        </section>
-
-        <!-- PRODUCTOS -->
-
-        <section 
-            id="productos"
-            class="seccion-admin"
-        >
-
-            <section class="inventario-admin">
-
-                <h2>
-                    🌿 Inventario
-                </h2>
-
-                <div id="listaInventario">
-
-                </div>
-
-            </section>
+            </div>
 
         </section>
 
@@ -302,21 +363,25 @@
             class="seccion-admin"
         >
 
-            <section class="pedidos-admin">
+            <div class="titulo-seccion">
 
                 <h2>
                     📦 Pedidos realizados
                 </h2>
 
-                <div id="listaPedidos">
+                <p>
+                    Control de pedidos realizados
+                </p>
 
-                </div>
+            </div>
 
-            </section>
+            <div id="listaPedidos">
+
+            </div>
 
         </section>
 
-    </div>
+    </main>
 
     <!-- PROTEGER -->
 
@@ -336,7 +401,7 @@
 
     <script>
 
-        function mostrarSeccion(id){
+        function mostrarSeccion(id,btn){
 
             const secciones =
             document.querySelectorAll(
@@ -354,6 +419,23 @@
             document.getElementById(id)
             .classList.add(
                 "activa"
+            );
+
+            const botones =
+            document.querySelectorAll(
+                ".menu-btn"
+            );
+
+            botones.forEach(b => {
+
+                b.classList.remove(
+                    "activo"
+                );
+
+            });
+
+            btn.classList.add(
+                "activo"
             );
 
         }

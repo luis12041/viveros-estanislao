@@ -1204,3 +1204,401 @@ header h1{
     }
 
 }
+/* =========================
+ADMIN PREMIUM
+========================= */
+
+.admin-body{
+
+    background:#f4f7fb;
+
+    display:flex;
+
+    font-family:Arial, Helvetica, sans-serif;
+
+}
+
+/* SIDEBAR */
+
+.sidebar-admin{
+
+    width:280px;
+
+    height:100vh;
+
+    background:#1b1f27;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    padding:30px 20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    box-shadow:
+    5px 0 20px rgba(0,0,0,.1);
+
+    z-index:999;
+
+}
+
+.logo-admin h2{
+
+    color:white;
+
+    font-size:34px;
+
+    margin-bottom:5px;
+
+}
+
+.logo-admin p{
+
+    color:#aaa;
+
+    font-size:14px;
+
+}
+
+.menu-admin{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+    margin-top:40px;
+
+}
+
+.menu-btn{
+
+    border:none;
+
+    background:#252b36;
+
+    color:white;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    text-align:left;
+
+    transition:.3s;
+
+}
+
+.menu-btn:hover{
+
+    background:#2e7d32;
+
+    transform:translateX(5px);
+
+}
+
+.menu-btn.activo{
+
+    background:#2e7d32;
+
+}
+
+.btn-logout{
+
+    border:none;
+
+    background:#d32f2f;
+
+    color:white;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+.btn-logout:hover{
+
+    background:#b71c1c;
+
+}
+
+/* CONTENIDO */
+
+.contenido-admin-pro{
+
+    margin-left:280px;
+
+    width:calc(100% - 280px);
+
+    padding:40px;
+
+}
+
+/* HEADER */
+
+.top-admin{
+
+    margin-bottom:40px;
+
+}
+
+.top-admin h1{
+
+    font-size:42px;
+
+    color:#1b1f27;
+
+    margin-bottom:10px;
+
+}
+
+.top-admin p{
+
+    color:#666;
+
+    font-size:18px;
+
+}
+
+/* DASHBOARD */
+
+.cards-dashboard{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(240px,1fr));
+
+    gap:25px;
+
+    margin-bottom:40px;
+
+}
+
+.card-dashboard{
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:30px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.card-dashboard:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.card-dashboard span{
+
+    font-size:45px;
+
+}
+
+.card-dashboard h3{
+
+    color:#666;
+
+    margin-bottom:8px;
+
+}
+
+.card-dashboard p{
+
+    font-size:34px;
+
+    font-weight:bold;
+
+    color:#1b1f27;
+
+}
+
+/* GRAFICA */
+
+.grafica-pro{
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:30px;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.grafica-pro h2{
+
+    margin-bottom:25px;
+
+    color:#1b1f27;
+
+}
+
+/* SECCIONES */
+
+.seccion-admin{
+
+    display:none;
+
+}
+
+.seccion-admin.activa{
+
+    display:block;
+
+}
+
+/* TITULOS */
+
+.titulo-seccion{
+
+    margin-bottom:30px;
+
+}
+
+.titulo-seccion h2{
+
+    font-size:35px;
+
+    color:#1b1f27;
+
+    margin-bottom:10px;
+
+}
+
+.titulo-seccion p{
+
+    color:#777;
+
+}
+
+/* FORMULARIO */
+
+.formulario-pro{
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.formulario-pro h2{
+
+    margin-bottom:10px;
+
+    color:#1b1f27;
+
+}
+
+.formulario-pro input,
+.formulario-pro textarea,
+.formulario-pro select{
+
+    padding:16px;
+
+    border:2px solid #eee;
+
+    border-radius:14px;
+
+    font-size:16px;
+
+    outline:none;
+
+}
+
+.formulario-pro button{
+
+    border:none;
+
+    background:#2e7d32;
+
+    color:white;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    transition:.3s;
+
+}
+
+.formulario-pro button:hover{
+
+    background:#1b5e20;
+
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .sidebar-admin{
+
+        width:100%;
+
+        height:auto;
+
+        position:relative;
+
+    }
+
+    .contenido-admin-pro{
+
+        margin-left:0;
+
+        width:100%;
+
+        padding:20px;
+
+    }
+
+}
