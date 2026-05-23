@@ -2,19 +2,60 @@
 
 const sesionActiva =
 
-sessionStorage.getItem(
+localStorage.getItem(
     "sesionActiva"
 );
 
 const correoActivo =
 
-sessionStorage.getItem(
+localStorage.getItem(
     "correoActivo"
 );
+
+/* PAGINA ACTUAL */
+
+const paginaActual =
+
+window.location.pathname;
+
+/* SI ESTA EN LOGIN */
+
+if(
+
+    paginaActual.includes(
+        "index.html"
+    ) &&
+
+    sesionActiva === "true"
+
+){
+
+    if(
+
+        correoActivo ===
+        "admin@vivero.com"
+
+    ){
+
+        window.location.href =
+        "admin.html";
+
+    }else{
+
+        window.location.href =
+        "catalogo.html";
+
+    }
+
+}
 
 /* SI NO HAY SESION */
 
 if(
+
+    !paginaActual.includes(
+        "index.html"
+    ) &&
 
     sesionActiva !== "true"
 
@@ -26,10 +67,6 @@ if(
 }
 
 /* PROTEGER ADMIN */
-
-const paginaActual =
-
-window.location.pathname;
 
 if(
 

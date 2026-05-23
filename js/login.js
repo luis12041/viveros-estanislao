@@ -92,374 +92,447 @@ let intentos = 0;
 let bloqueado = false;
 
 /* =========================
+SI YA HAY SESION
+========================= */
+
+const sesionActiva =
+
+localStorage.getItem(
+    "sesionActiva"
+);
+
+const correoActivo =
+
+localStorage.getItem(
+    "correoActivo"
+);
+
+if(
+
+    sesionActiva === "true"
+
+){
+
+    if(
+
+        correoActivo ===
+        "admin@vivero.com"
+
+    ){
+
+        window.location.href =
+        "admin.html";
+
+    }else{
+
+        window.location.href =
+        "catalogo.html";
+
+    }
+
+}
+
+/* =========================
 UBICACION
 ========================= */
 
 let ubicacionGuardada = null;
 
-btnUbicacion.addEventListener(
-    "click",
-    () => {
+if(btnUbicacion){
 
-        navigator.geolocation.getCurrentPosition(
+    btnUbicacion.addEventListener(
+        "click",
+        () => {
 
-            posicion => {
+            navigator.geolocation.getCurrentPosition(
 
-                const lat =
-                posicion.coords.latitude;
+                posicion => {
 
-                const lng =
-                posicion.coords.longitude;
+                    const lat =
+                    posicion.coords.latitude;
 
-                ubicacionGuardada = {
+                    const lng =
+                    posicion.coords.longitude;
 
-                    lat,
-                    lng
+                    ubicacionGuardada = {
 
-                };
+                        lat,
+                        lng
 
-                localStorage.setItem(
+                    };
 
-                    "ubicacion",
+                    localStorage.setItem(
 
-                    JSON.stringify(
-                        ubicacionGuardada
-                    )
+                        "ubicacion",
 
-                );
-
-                alert(
-                    "Ubicación guardada 📍"
-                );
-
-            },
-
-            () => {
-
-                alert(
-                    "No se pudo obtener la ubicación"
-                );
-
-            }
-
-        );
-
-    }
-);
-
-/* =========================
-LOGIN
-========================= */
-
-btnLogin.addEventListener(
-    "click",
-    async () => {
-
-        if(bloqueado){
-
-            alert(
-                "Acceso bloqueado temporalmente"
-            );
-
-            return;
-
-        }
-
-        const correo =
-        document.getElementById(
-            "correoLogin"
-        ).value;
-
-        const password =
-        document.getElementById(
-            "passwordLogin"
-        ).value;
-
-        const textoLogin =
-        document.getElementById(
-            "textoLogin"
-        );
-
-        const loaderLogin =
-        document.getElementById(
-            "loaderLogin"
-        );
-
-        textoLogin.style.display =
-        "none";
-
-        loaderLogin.style.display =
-        "block";
-
-        try{
-
-            const userCredential =
-
-            await signInWithEmailAndPassword(
-
-                auth,
-                correo,
-                password
-
-            );
-
-            const usuario =
-            userCredential.user;
-
-            intentos = 0;
-
-            /* SESION */
-
-            sessionStorage.setItem(
-                "sesionActiva",
-                "true"
-            );
-
-            sessionStorage.setItem(
-                "correoActivo",
-                correo
-            );
-
-            /* USUARIO */
-
-            localStorage.setItem(
-
-                "usuario",
-
-                JSON.stringify({
-
-                    nombre:
-                    usuario.displayName ||
-                    "Cliente",
-
-                    correo:
-                    usuario.email,
-
-                    ubicacion:
-                    JSON.parse(
-                        localStorage.getItem(
-                            "ubicacion"
+                        JSON.stringify(
+                            ubicacionGuardada
                         )
-                    ) || null
 
-                })
+                    );
 
-            );
+                    alert(
+                        "Ubicación guardada 📍"
+                    );
 
-            /* ADMIN */
+                },
 
-            if(
-                correo ===
-                "admin@vivero.com"
-            ){
+                () => {
 
-                window.location.href =
-                "admin.html";
-
-            }else{
-
-                window.location.href =
-                "catalogo.html";
-
-            }
-
-        }catch(error){
-
-            textoLogin.style.display =
-            "block";
-
-            loaderLogin.style.display =
-            "none";
-
-            intentos++;
-
-            alert(
-                "Correo o contraseña incorrectos"
-            );
-
-            if(intentos >= 5){
-
-                bloqueado = true;
-
-                alert(
-                    "Demasiados intentos. Espera 1 minuto."
-                );
-
-                setTimeout(() => {
-
-                    bloqueado = false;
-
-                    intentos = 0;
-
-                },60000);
-
-            }
-
-        }
-
-    }
-);
-
-/* =========================
-REGISTRO
-========================= */
-
-btnRegistro.addEventListener(
-    "click",
-    async () => {
-
-        const nombre =
-        document.getElementById(
-            "nombreRegistro"
-        ).value;
-
-        const correo =
-        document.getElementById(
-            "correoRegistro"
-        ).value;
-
-        const password =
-        document.getElementById(
-            "passwordRegistro"
-        ).value;
-
-        if(
-
-            nombre === "" ||
-            correo === "" ||
-            password === ""
-
-        ){
-
-            alert(
-                "Completa todos los campos"
-            );
-
-            return;
-
-        }
-
-        try{
-
-            const userCredential =
-
-            await createUserWithEmailAndPassword(
-
-                auth,
-                correo,
-                password
-
-            );
-
-            /* GUARDAR NOMBRE */
-
-            await updateProfile(
-
-                userCredential.user,
-
-                {
-
-                    displayName:nombre
+                    alert(
+                        "No se pudo obtener la ubicación"
+                    );
 
                 }
 
             );
 
-            /* LOCAL */
+        }
+    );
 
-            localStorage.setItem(
+}
 
-                "usuario",
+/* =========================
+LOGIN
+========================= */
 
-                JSON.stringify({
+if(btnLogin){
 
-                    nombre,
+    btnLogin.addEventListener(
+        "click",
+        async () => {
 
-                    correo,
+            if(bloqueado){
 
-                    ubicacion:
-                    JSON.parse(
-                        localStorage.getItem(
-                            "ubicacion"
-                        )
-                    ) || null
+                alert(
+                    "Acceso bloqueado temporalmente"
+                );
 
-                })
+                return;
 
-            );
+            }
 
-            alert(
-                "Cuenta creada correctamente 🌿"
-            );
-
-            document.getElementById(
-                "modalRegistro"
-            ).classList.remove(
-                "activo"
-            );
-
+            const correo =
             document.getElementById(
                 "correoLogin"
-            ).value = correo;
+            ).value;
 
+            const password =
             document.getElementById(
                 "passwordLogin"
-            ).value = password;
+            ).value;
 
-        }catch(error){
-
-            alert(
-                "Error al crear cuenta"
+            const textoLogin =
+            document.getElementById(
+                "textoLogin"
             );
 
-        }
+            const loaderLogin =
+            document.getElementById(
+                "loaderLogin"
+            );
 
-    }
-);
+            if(textoLogin){
+
+                textoLogin.style.display =
+                "none";
+
+            }
+
+            if(loaderLogin){
+
+                loaderLogin.style.display =
+                "block";
+
+            }
+
+            try{
+
+                const userCredential =
+
+                await signInWithEmailAndPassword(
+
+                    auth,
+                    correo,
+                    password
+
+                );
+
+                const usuario =
+                userCredential.user;
+
+                intentos = 0;
+
+                /* SESION */
+
+                localStorage.setItem(
+                    "sesionActiva",
+                    "true"
+                );
+
+                localStorage.setItem(
+                    "correoActivo",
+                    correo
+                );
+
+                /* USUARIO */
+
+                localStorage.setItem(
+
+                    "usuario",
+
+                    JSON.stringify({
+
+                        nombre:
+                        usuario.displayName ||
+                        "Cliente",
+
+                        correo:
+                        usuario.email,
+
+                        ubicacion:
+                        JSON.parse(
+                            localStorage.getItem(
+                                "ubicacion"
+                            )
+                        ) || null
+
+                    })
+
+                );
+
+                /* ADMIN */
+
+                if(
+                    correo ===
+                    "admin@vivero.com"
+                ){
+
+                    window.location.href =
+                    "admin.html";
+
+                }else{
+
+                    window.location.href =
+                    "catalogo.html";
+
+                }
+
+            }catch(error){
+
+                if(textoLogin){
+
+                    textoLogin.style.display =
+                    "block";
+
+                }
+
+                if(loaderLogin){
+
+                    loaderLogin.style.display =
+                    "none";
+
+                }
+
+                intentos++;
+
+                alert(
+                    "Correo o contraseña incorrectos"
+                );
+
+                if(intentos >= 5){
+
+                    bloqueado = true;
+
+                    alert(
+                        "Demasiados intentos. Espera 1 minuto."
+                    );
+
+                    setTimeout(() => {
+
+                        bloqueado = false;
+
+                        intentos = 0;
+
+                    },60000);
+
+                }
+
+            }
+
+        }
+    );
+
+}
+
+/* =========================
+REGISTRO
+========================= */
+
+if(btnRegistro){
+
+    btnRegistro.addEventListener(
+        "click",
+        async () => {
+
+            const nombre =
+            document.getElementById(
+                "nombreRegistro"
+            ).value;
+
+            const correo =
+            document.getElementById(
+                "correoRegistro"
+            ).value;
+
+            const password =
+            document.getElementById(
+                "passwordRegistro"
+            ).value;
+
+            if(
+
+                nombre === "" ||
+                correo === "" ||
+                password === ""
+
+            ){
+
+                alert(
+                    "Completa todos los campos"
+                );
+
+                return;
+
+            }
+
+            try{
+
+                const userCredential =
+
+                await createUserWithEmailAndPassword(
+
+                    auth,
+                    correo,
+                    password
+
+                );
+
+                /* GUARDAR NOMBRE */
+
+                await updateProfile(
+
+                    userCredential.user,
+
+                    {
+
+                        displayName:nombre
+
+                    }
+
+                );
+
+                /* LOCAL */
+
+                localStorage.setItem(
+
+                    "usuario",
+
+                    JSON.stringify({
+
+                        nombre,
+
+                        correo,
+
+                        ubicacion:
+                        JSON.parse(
+                            localStorage.getItem(
+                                "ubicacion"
+                            )
+                        ) || null
+
+                    })
+
+                );
+
+                alert(
+                    "Cuenta creada correctamente 🌿"
+                );
+
+                document.getElementById(
+                    "modalRegistro"
+                ).classList.remove(
+                    "activo"
+                );
+
+                document.getElementById(
+                    "correoLogin"
+                ).value = correo;
+
+                document.getElementById(
+                    "passwordLogin"
+                ).value = password;
+
+            }catch(error){
+
+                alert(
+                    "Error al crear cuenta"
+                );
+
+            }
+
+        }
+    );
+
+}
 
 /* =========================
 RECUPERAR
 ========================= */
 
-btnRecuperar.addEventListener(
-    "click",
-    async () => {
+if(btnRecuperar){
 
-        const correo =
-        document.getElementById(
-            "correoLogin"
-        ).value;
+    btnRecuperar.addEventListener(
+        "click",
+        async () => {
 
-        if(correo === ""){
+            const correo =
+            document.getElementById(
+                "correoLogin"
+            ).value;
 
-            alert(
-                "Escribe tu correo"
-            );
+            if(correo === ""){
 
-            return;
+                alert(
+                    "Escribe tu correo"
+                );
+
+                return;
+
+            }
+
+            try{
+
+                await sendPasswordResetEmail(
+
+                    auth,
+                    correo
+
+                );
+
+                alert(
+                    "Se envió un enlace a tu correo 📧"
+                );
+
+            }catch(error){
+
+                alert(
+                    "Error al enviar correo"
+                );
+
+            }
 
         }
+    );
 
-        try{
-
-            await sendPasswordResetEmail(
-
-                auth,
-                correo
-
-            );
-
-            alert(
-                "Se envió un enlace a tu correo 📧"
-            );
-
-        }catch(error){
-
-            alert(
-                "Error al enviar correo"
-            );
-
-        }
-
-    }
-);
+}
