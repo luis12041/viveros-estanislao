@@ -2,13 +2,13 @@
 
 const sesionActiva =
 
-localStorage.getItem(
+sessionStorage.getItem(
     "sesionActiva"
 );
 
 const correoActivo =
 
-localStorage.getItem(
+sessionStorage.getItem(
     "correoActivo"
 );
 
