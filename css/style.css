@@ -521,17 +521,19 @@ header{
 
     display:flex;
 
-    justify-content:center;
+    justify-content:space-between;
 
     align-items:center;
 
-    padding:25px 30px;
-
-    position:relative;
+    padding:20px 30px;
 
     background:#2e7d32;
 
     color:white;
+
+    gap:15px;
+
+    flex-wrap:wrap;
 
 }
 
@@ -1054,12 +1056,6 @@ header h1{
 }
 .btn-cerrar{
 
-    position:fixed;
-
-    top:20px;
-
-    left:20px;
-
     background:#c62828;
 
     color:white;
@@ -1068,7 +1064,7 @@ header h1{
 
     padding:12px 18px;
 
-    border-radius:14px;
+    border-radius:12px;
 
     cursor:pointer;
 
@@ -1076,17 +1072,12 @@ header h1{
 
     transition:.3s;
 
-    z-index:3000;
-
-    box-shadow:
-    0 5px 15px rgba(0,0,0,.2);
+    font-size:15px;
 
 }
 
 .btn-cerrar:hover{
 
     background:#8e0000;
-
-    transform:translateY(-2px);
 
 }
