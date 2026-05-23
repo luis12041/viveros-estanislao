@@ -11,7 +11,8 @@ import {
     getDocs,
     deleteDoc,
     doc,
-    updateDoc
+    updateDoc,
+    onSnapshot
 
 } from
 "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
@@ -758,89 +759,129 @@ window.eliminarProducto = function(index){
 };
 
 /* =========================
-PEDIDOS
+PEDIDOS TIEMPO REAL
 ========================= */
 
 if(listaPedidos){
 
-    mostrarPedidos();
+    onSnapshot(
 
-}
+        collection(db,"pedidos"),
 
-async function mostrarPedidos(){
+        (querySnapshot) => {
 
-    const querySnapshot =
-    await getDocs(
-        collection(db,"pedidos")
+            listaPedidos.innerHTML = "";
+
+            querySnapshot.forEach(docu => {
+
+                const pedido =
+                docu.data();
+
+                listaPedidos.innerHTML += `
+
+                    <div class="pedido">
+
+                        <h3>
+                            👤 ${pedido.cliente}
+                        </h3>
+
+                        <p>
+                            📧 ${pedido.correo}
+                        </p>
+
+                        <p>
+                            📅 ${pedido.fecha}
+                        </p>
+
+                        <div class="estado-box">
+
+                            <p class="estado-texto">
+
+                                Estado:
+                                <span class="estado-${pedido.estado.toLowerCase()}">
+
+                                    ${pedido.estado}
+
+                                </span>
+
+                            </p>
+
+                            <select
+                                onchange="cambiarEstado(
+                                    '${docu.id}',
+                                    this.value
+                                )"
+                            >
+
+                                <option
+                                    value="Pendiente"
+                                    ${pedido.estado === "Pendiente" ? "selected" : ""}
+                                >
+
+                                    Pendiente
+
+                                </option>
+
+                                <option
+                                    value="Enviado"
+                                    ${pedido.estado === "Enviado" ? "selected" : ""}
+                                >
+
+                                    Enviado
+
+                                </option>
+
+                                <option
+                                    value="Entregado"
+                                    ${pedido.estado === "Entregado" ? "selected" : ""}
+                                >
+
+                                    Entregado
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <h2>
+                            Total:
+                            $${pedido.total}
+                        </h2>
+
+                    </div>
+
+                `;
+
+            });
+
+        }
+
     );
-
-    listaPedidos.innerHTML = "";
-
-    querySnapshot.forEach(docu => {
-
-        const pedido =
-        docu.data();
-
-        listaPedidos.innerHTML += `
-
-            <div class="pedido">
-
-                <h3>
-                    👤 ${pedido.cliente}
-                </h3>
-
-                <p>
-                    📧 ${pedido.correo}
-                </p>
-
-                <p>
-                    📅 ${pedido.fecha}
-                </p>
-
-                <p>
-                    Estado:
-                    ${pedido.estado}
-                </p>
-
-                <h2>
-                    Total:
-                    $${pedido.total}
-                </h2>
-
-                <button
-                    class="btn-entregado"
-                    onclick="entregarPedido(
-                        '${docu.id}'
-                    )"
-                >
-
-                    Entregado
-
-                </button>
-
-            </div>
-
-        `;
-
-    });
 
 }
 
 /* =========================
-ENTREGAR
+CAMBIAR ESTADO
 ========================= */
 
-window.entregarPedido =
-async function(id){
+window.cambiarEstado =
+async function(id,estado){
 
-    await deleteDoc(
-        doc(db,"pedidos",id)
+    await updateDoc(
+
+        doc(db,"pedidos",id),
+
+        {
+
+            estado:estado
+
+        }
+
     );
 
-    mostrarPedidos();
-
     mostrarToast(
-        "Pedido entregado ✅"
+        "Estado actualizado 🚚"
     );
 
 };
