@@ -1613,3 +1613,126 @@ PEDIDOS PRO
     cursor:pointer;
 
 }
+/* =========================
+DIRECCION ENTREGA
+========================= */
+
+.direccion-entrega{
+
+    width:90%;
+
+    margin:30px auto;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:25px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.direccion-entrega h2{
+
+    margin-bottom:20px;
+
+    color:#1b5e20;
+
+}
+
+.direccion-entrega input{
+
+    width:100%;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:#f4f7fb;
+
+    outline:none;
+
+    font-size:16px;
+
+}
+/* =========================
+FAVORITOS
+========================= */
+
+.btn-favorito.activo{
+
+    background:#ffebee;
+
+    color:#c62828;
+
+    transform:scale(1.1);
+
+}
+
+/* =========================
+HISTORIAL REAL
+========================= */
+
+.historial-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap:20px;
+
+}
+
+.historial-item{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.08);
+
+    border-left:6px solid #2e7d32;
+
+}
+
+.historial-item h3{
+
+    margin-bottom:10px;
+
+    color:#1b1f27;
+
+}
+
+.historial-item p{
+
+    color:#666;
+
+    margin-bottom:8px;
+
+}
+
+/* =========================
+CATEGORIA ACTIVA PRO
+========================= */
+
+.categoria-btn.activa{
+
+    background:
+    linear-gradient(
+        135deg,
+        #2e7d32,
+        #1b5e20
+    );
+
+    color:white;
+
+    transform:translateY(-2px);
+
+}

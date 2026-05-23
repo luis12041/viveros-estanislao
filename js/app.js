@@ -75,6 +75,53 @@ const cerrarSesion =
 document.getElementById("cerrarSesion");
 
 /* =========================
+CATEGORIAS
+========================= */
+
+const botonesCategoria =
+
+document.querySelectorAll(
+    ".categoria-btn"
+);
+
+let categoriaActiva =
+"Todas";
+
+botonesCategoria.forEach(btn => {
+
+    btn.addEventListener(
+        "click",
+        () => {
+
+            botonesCategoria.forEach(b => {
+
+                b.classList.remove(
+                    "activa"
+                );
+
+            });
+
+            btn.classList.add(
+                "activa"
+            );
+
+            categoriaActiva =
+
+            btn.innerText
+            .replace("☀️","")
+            .replace("🌑","")
+            .replace("🌤️","")
+            .replace("🌿","")
+            .trim();
+
+            filtrarPlantas();
+
+        }
+    );
+
+});
+
+/* =========================
 USUARIO CONECTADO
 ========================= */
 
@@ -104,6 +151,55 @@ if(
     `👋 Hola ${usuarioGuardado.nombre}`;
 
 }
+
+/* =========================
+GUARDAR DIRECCION
+========================= */
+
+const inputDireccion =
+
+document.getElementById(
+    "direccionEntrega"
+);
+
+if(inputDireccion){
+
+    inputDireccion.value =
+
+    localStorage.getItem(
+        "direccionEntrega"
+    ) || "";
+
+    inputDireccion.addEventListener(
+        "input",
+        () => {
+
+            localStorage.setItem(
+
+                "direccionEntrega",
+
+                inputDireccion.value
+
+            );
+
+        }
+    );
+
+}
+
+/* =========================
+FAVORITOS
+========================= */
+
+let favoritos =
+
+JSON.parse(
+
+    localStorage.getItem(
+        "favoritos"
+    )
+
+) || [];
 
 /* =========================
 CARRITO
@@ -246,22 +342,22 @@ if(botonGuardar){
 async function guardarPlanta(){
 
     const nombre =
-    document.getElementById("nombre").value;
+    document.getElementById("nombre")?.value;
 
     const precio =
-    document.getElementById("precio").value;
+    document.getElementById("precio")?.value;
 
     const descripcion =
-    document.getElementById("descripcion").value;
+    document.getElementById("descripcion")?.value;
 
     const riego =
-    document.getElementById("riego").value;
+    document.getElementById("riego")?.value;
 
     const luz =
-    document.getElementById("luz").value;
+    document.getElementById("luz")?.value;
 
     const stock =
-    document.getElementById("stock").value;
+    document.getElementById("stock")?.value;
 
     if(
 
@@ -471,17 +567,50 @@ async function filtrarPlantas(){
 
         planta.riego === riego;
 
+        let coincideCategoria =
+        true;
+
+        if(
+            categoriaActiva === "Sol"
+        ){
+
+            coincideCategoria =
+            planta.luz === "Sol";
+
+        }
+
+        if(
+            categoriaActiva === "Sombra"
+        ){
+
+            coincideCategoria =
+            planta.luz === "Sombra";
+
+        }
+
+        if(
+            categoriaActiva === "Resolana"
+        ){
+
+            coincideCategoria =
+            planta.luz === "Luz indirecta";
+
+        }
+
         return (
 
             coincideNombre &&
             coincideLuz &&
-            coincideRiego
+            coincideRiego &&
+            coincideCategoria
 
         );
 
     });
 
-    renderizarPlantas(filtradas);
+    renderizarPlantas(
+        filtradas
+    );
 
 }
 
@@ -500,6 +629,9 @@ function renderizarPlantas(plantas){
         let alertaStock = "";
 
         let botonStock = "";
+
+        const esFavorito =
+        favoritos.includes(planta.id);
 
         if(Number(planta.stock) <= 30){
 
@@ -554,7 +686,10 @@ function renderizarPlantas(plantas){
 
             <div class="card">
 
-                <button class="btn-favorito">
+                <button 
+                    class="btn-favorito ${esFavorito ? "activo" : ""}"
+                    onclick="toggleFavorito('${planta.id}',this)"
+                >
 
                     ❤️
 
@@ -634,6 +769,55 @@ window.toggleInfo = function(btn){
 
     info.classList.toggle(
         "activa"
+    );
+
+};
+
+/* =========================
+FAVORITOS
+========================= */
+
+window.toggleFavorito = function(id,btn){
+
+    if(
+        favoritos.includes(id)
+    ){
+
+        favoritos =
+        favoritos.filter(
+            fav => fav !== id
+        );
+
+        btn.classList.remove(
+            "activo"
+        );
+
+        mostrarToast(
+            "Favorito eliminado ❌"
+        );
+
+    }else{
+
+        favoritos.push(id);
+
+        btn.classList.add(
+            "activo"
+        );
+
+        mostrarToast(
+            "Favorito agregado ❤️"
+        );
+
+    }
+
+    localStorage.setItem(
+
+        "favoritos",
+
+        JSON.stringify(
+            favoritos
+        )
+
     );
 
 };
@@ -790,6 +974,10 @@ if(listaPedidos){
                         </p>
 
                         <p>
+                            📍 ${pedido.direccion || "Sin dirección"}
+                        </p>
+
+                        <p>
                             📅 ${pedido.fecha}
                         </p>
 
@@ -903,303 +1091,84 @@ async function(id,estado){
 };
 
 /* =========================
-INVENTARIO
+HISTORIAL PEDIDOS
 ========================= */
 
-if(listaInventario){
+const historialPedidos =
 
-    mostrarInventario();
-
-}
-
-async function mostrarInventario(){
-
-    const querySnapshot =
-    await getDocs(
-        collection(db,"plantas")
-    );
-
-    listaInventario.innerHTML = "";
-
-    querySnapshot.forEach(docu => {
-
-        const planta =
-        docu.data();
-
-        listaInventario.innerHTML += `
-
-            <div class="inventario-card">
-
-                <img 
-                    src="${planta.imagen}"
-                >
-
-                <div class="inventario-info">
-
-                    <h3>
-                        ${planta.nombre}
-                    </h3>
-
-                    <p>
-                        💲 ${planta.precio}
-                    </p>
-
-                    <p>
-                        📦 Stock:
-                        ${planta.stock}
-                    </p>
-
-                </div>
-
-                <div class="acciones-admin">
-
-                    <button
-                        class="btn-editar"
-                        onclick="editarPlanta(
-                            '${docu.id}',
-                            '${planta.nombre}',
-                            '${planta.precio}',
-                            '${planta.stock}'
-                        )"
-                    >
-
-                        ✏️ Editar
-
-                    </button>
-
-                    <button
-                        class="btn-eliminar"
-                        onclick="eliminarPlanta(
-                            '${docu.id}'
-                        )"
-                    >
-
-                        🗑️ Eliminar
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        `;
-
-    });
-
-}
-
-/* =========================
-ELIMINAR PLANTA
-========================= */
-
-window.eliminarPlanta =
-async function(id){
-
-    const confirmar =
-    confirm(
-        "¿Eliminar planta?"
-    );
-
-    if(!confirmar) return;
-
-    await deleteDoc(
-        doc(db,"plantas",id)
-    );
-
-    mostrarInventario();
-
-    mostrarPlantas();
-
-    mostrarToast(
-        "Planta eliminada 🗑️"
-    );
-
-};
-
-/* =========================
-EDITAR PLANTA
-========================= */
-
-window.editarPlanta =
-async function(
-
-    id,
-    nombreActual,
-    precioActual,
-    stockActual
-
-){
-
-    const nuevoNombre =
-    prompt(
-        "Nuevo nombre",
-        nombreActual
-    );
-
-    if(!nuevoNombre) return;
-
-    const nuevoPrecio =
-    prompt(
-        "Nuevo precio",
-        precioActual
-    );
-
-    if(!nuevoPrecio) return;
-
-    const nuevoStock =
-    prompt(
-        "Nuevo stock",
-        stockActual
-    );
-
-    if(!nuevoStock) return;
-
-    await updateDoc(
-
-        doc(db,"plantas",id),
-
-        {
-
-            nombre:nuevoNombre,
-
-            precio:nuevoPrecio,
-
-            stock:nuevoStock
-
-        }
-
-    );
-
-    mostrarToast(
-        "Planta actualizada 🌿"
-    );
-
-    mostrarInventario();
-
-    mostrarPlantas();
-
-};
-
-/* =========================
-CATEGORIAS
-========================= */
-
-const botonesCategorias =
-
-document.querySelectorAll(
-    ".categoria-btn"
+document.getElementById(
+    "historialPedidos"
 );
 
-botonesCategorias.forEach(btn => {
+if(historialPedidos){
 
-    btn.addEventListener(
-        "click",
-        async () => {
+    onSnapshot(
 
-            botonesCategorias.forEach(b => {
+        collection(db,"pedidos"),
 
-                b.classList.remove(
-                    "activa"
-                );
+        (querySnapshot) => {
 
-            });
+            historialPedidos.innerHTML =
+            "";
 
-            btn.classList.add(
-                "activa"
-            );
+            querySnapshot.forEach(docu => {
 
-            const categoria =
-
-            btn.innerText
-            .trim();
-
-            const querySnapshot =
-            await getDocs(
-                collection(db,"plantas")
-            );
-
-            const plantas = [];
-
-            querySnapshot.forEach(doc => {
-
-                plantas.push({
-
-                    id:doc.id,
-
-                    ...doc.data()
-
-                });
-
-            });
-
-            if(
-
-                categoria.includes(
-                    "Todas"
-                )
-
-            ){
-
-                renderizarPlantas(
-                    plantas
-                );
-
-                return;
-
-            }
-
-            const filtradas =
-
-            plantas.filter(planta => {
+                const pedido =
+                docu.data();
 
                 if(
 
-                    categoria.includes(
-                        "Sol"
-                    )
+                    pedido.correo ===
+                    usuarioGuardado?.correo
 
                 ){
 
-                    return planta.luz === "Sol";
+                    historialPedidos.innerHTML += `
 
-                }
+                        <div class="historial-item">
 
-                if(
+                            <h3>
 
-                    categoria.includes(
-                        "Sombra"
-                    )
+                                🌿 Pedido realizado
 
-                ){
+                            </h3>
 
-                    return planta.luz === "Sombra";
+                            <p>
 
-                }
+                                📅 ${pedido.fecha}
 
-                if(
+                            </p>
 
-                    categoria.includes(
-                        "Resolana"
-                    )
+                            <p>
 
-                ){
+                                💰 Total:
+                                $${pedido.total}
 
-                    return (
+                            </p>
 
-                        planta.luz ===
-                        "Luz indirecta"
+                            <p>
 
-                    );
+                                🚚 Estado:
+                                ${pedido.estado}
+
+                            </p>
+
+                            <p>
+
+                                📍 ${pedido.direccion}
+
+                            </p>
+
+                        </div>
+
+                    `;
 
                 }
 
             });
-
-            renderizarPlantas(
-                filtradas
-            );
 
         }
+
     );
 
-});
+}

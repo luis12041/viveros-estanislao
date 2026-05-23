@@ -3,133 +3,426 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<title>
-Pago exitoso
-</title>
+    <title>
+        Pago exitoso
+    </title>
 
-<link
-rel="stylesheet"
-href="css/style.css"
->
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
 
-<style>
+    <style>
 
-body{
+        *{
 
-    display:flex;
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
 
-    justify-content:center;
+            font-family:
+            Arial,
+            Helvetica,
+            sans-serif;
 
-    align-items:center;
+        }
 
-    min-height:100vh;
+        body{
 
-    background:#f5f5f5;
+            min-height:100vh;
 
-}
+            display:flex;
 
-.pago-box{
+            justify-content:center;
 
-    background:white;
+            align-items:center;
 
-    padding:50px;
+            background:
 
-    border-radius:25px;
+            linear-gradient(
 
-    text-align:center;
+                rgba(0,0,0,.45),
+                rgba(0,0,0,.45)
 
-    box-shadow:
-    0 10px 30px rgba(0,0,0,.1);
+            ),
 
-    width:90%;
+            url("https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=1400&auto=format&fit=crop")
 
-    max-width:500px;
+            center/cover;
 
-}
+            padding:20px;
 
-.pago-box h1{
+        }
 
-    color:#2e7d32;
+        .pago-box{
 
-    margin-bottom:20px;
+            width:100%;
 
-    font-size:40px;
+            max-width:650px;
 
-}
+            background:white;
 
-.pago-box p{
+            border-radius:35px;
 
-    color:#666;
+            padding:60px 50px;
 
-    font-size:18px;
+            text-align:center;
 
-    margin-bottom:30px;
+            box-shadow:
+            0 20px 50px rgba(0,0,0,.25);
 
-}
+            animation:aparecer .5s ease;
 
-.pago-box a{
+            position:relative;
 
-    display:inline-block;
+            overflow:hidden;
 
-    background:#2e7d32;
+        }
 
-    color:white;
+        .pago-box::before{
 
-    text-decoration:none;
+            content:"";
 
-    padding:15px 25px;
+            position:absolute;
 
-    border-radius:12px;
+            top:0;
+            left:0;
 
-    font-weight:bold;
+            width:100%;
+            height:8px;
 
-    transition:.3s;
+            background:#2e7d32;
 
-}
+        }
 
-.pago-box a:hover{
+        @keyframes aparecer{
 
-    background:#1b5e20;
+            from{
 
-    transform:translateY(-2px);
+                opacity:0;
+                transform:translateY(30px);
 
-}
+            }
 
-</style>
+            to{
+
+                opacity:1;
+                transform:translateY(0);
+
+            }
+
+        }
+
+        .icono-check{
+
+            width:120px;
+            height:120px;
+
+            margin:auto;
+
+            border-radius:50%;
+
+            background:#e8f5e9;
+
+            display:flex;
+
+            justify-content:center;
+
+            align-items:center;
+
+            font-size:65px;
+
+            color:#2e7d32;
+
+            margin-bottom:30px;
+
+        }
+
+        .pago-box h1{
+
+            color:#1b5e20;
+
+            font-size:50px;
+
+            margin-bottom:20px;
+
+        }
+
+        .pago-box p{
+
+            color:#666;
+
+            font-size:20px;
+
+            line-height:1.7;
+
+            margin-bottom:35px;
+
+        }
+
+        .info-pedido{
+
+            background:#f4f7fb;
+
+            border-radius:20px;
+
+            padding:25px;
+
+            margin-bottom:35px;
+
+            text-align:left;
+
+        }
+
+        .info-pedido h3{
+
+            color:#1b5e20;
+
+            margin-bottom:20px;
+
+            font-size:24px;
+
+        }
+
+        .info-pedido p{
+
+            margin:10px 0;
+
+            font-size:16px;
+
+            color:#444;
+
+        }
+
+        .acciones{
+
+            display:flex;
+
+            gap:20px;
+
+            justify-content:center;
+
+            flex-wrap:wrap;
+
+        }
+
+        .btn-volver{
+
+            background:#2e7d32;
+
+            color:white;
+
+            text-decoration:none;
+
+            padding:18px 35px;
+
+            border-radius:15px;
+
+            font-weight:bold;
+
+            transition:.3s;
+
+            font-size:17px;
+
+        }
+
+        .btn-volver:hover{
+
+            background:#1b5e20;
+
+            transform:translateY(-3px);
+
+        }
+
+        .btn-seguir{
+
+            background:#f4f7fb;
+
+            color:#1b1b1b;
+
+            text-decoration:none;
+
+            padding:18px 35px;
+
+            border-radius:15px;
+
+            font-weight:bold;
+
+            transition:.3s;
+
+            font-size:17px;
+
+        }
+
+        .btn-seguir:hover{
+
+            background:#e4e9f1;
+
+            transform:translateY(-3px);
+
+        }
+
+        @media(max-width:700px){
+
+            .pago-box{
+
+                padding:40px 25px;
+
+            }
+
+            .pago-box h1{
+
+                font-size:38px;
+
+            }
+
+            .pago-box p{
+
+                font-size:17px;
+
+            }
+
+            .acciones{
+
+                flex-direction:column;
+
+            }
+
+            .btn-volver,
+            .btn-seguir{
+
+                width:100%;
+
+            }
+
+        }
+
+    </style>
 
 </head>
 
 <body>
 
-<div class="pago-box">
+    <div class="pago-box">
 
-<h1>
-✅ Pago realizado
-</h1>
+        <div class="icono-check">
 
-<p>
-Tu pedido fue procesado correctamente 🌿
-</p>
+            ✅
 
-<a href="catalogo.html">
+        </div>
 
-Volver al catálogo
+        <h1>
+            Pago realizado
+        </h1>
 
-</a>
+        <p>
+            Tu pedido fue procesado correctamente 🌿<br>
+            Gracias por comprar en Viveros Estanislao.
+        </p>
 
-</div>
+        <div class="info-pedido">
 
-<script
-type="module"
-src="js/success.js"
-></script>
+            <h3>
+                📦 Información del pedido
+            </h3>
+
+            <p id="nombreCliente">
+
+                👤 Cliente:
+                Cargando...
+
+            </p>
+
+            <p id="correoCliente">
+
+                📧 Correo:
+                Cargando...
+
+            </p>
+
+            <p id="direccionCliente">
+
+                📍 Dirección:
+                Cargando...
+
+            </p>
+
+        </div>
+
+        <div class="acciones">
+
+            <a 
+                href="catalogo.html"
+                class="btn-volver"
+            >
+
+                🌿 Volver al catálogo
+
+            </a>
+
+            <a 
+                href="catalogo.html"
+                class="btn-seguir"
+            >
+
+                🛒 Seguir comprando
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <script type="module">
+
+        import "./js/success.js";
+
+        const usuario =
+
+        JSON.parse(
+
+            localStorage.getItem(
+                "usuario"
+            )
+
+        );
+
+        const direccion =
+
+        localStorage.getItem(
+            "direccionEntrega"
+        );
+
+        if(usuario){
+
+            document.getElementById(
+                "nombreCliente"
+            ).innerHTML =
+
+            `👤 Cliente: ${usuario.nombre}`;
+
+            document.getElementById(
+                "correoCliente"
+            ).innerHTML =
+
+            `📧 Correo: ${usuario.correo}`;
+
+        }
+
+        document.getElementById(
+            "direccionCliente"
+        ).innerHTML =
+
+        `📍 Dirección: ${direccion || "Sin dirección"}`;
+
+    </script>
 
 </body>
 </html>
