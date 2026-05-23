@@ -173,18 +173,15 @@ btnLogin.addEventListener(
 
             intentos = 0;
 
-sessionStorage.setItem(
-    "sesionActiva",
-    "true"
-);
+            sessionStorage.setItem(
+                "sesionActiva",
+                "true"
+            );
 
-sessionStorage.setItem(
-
-    "correoActivo",
-
-    correo
-
-);
+            sessionStorage.setItem(
+                "correoActivo",
+                correo
+            );
 
             if(
                 correo ===
@@ -375,40 +372,3 @@ btnRecuperar.addEventListener(
 
     }
 );
-
-/* SESION ACTIVA */
-
-const sesionActiva =
-sessionStorage.getItem(
-    "sesionActiva"
-);
-
-const correoActivo =
-sessionStorage.getItem(
-    "correoActivo"
-);
-
-if(
-
-    sesionActiva === "true" &&
-
-    correoActivo !== null
-
-){
-
-    if(
-        correoActivo ===
-        "admin@vivero.com"
-    ){
-
-        window.location.href =
-        "admin.html";
-
-    }else{
-
-        window.location.href =
-        "catalogo.html";
-
-    }
-
-}

@@ -129,8 +129,8 @@ async function guardarPedido(){
 
             total,
 
-      estado:
-"Concluido",
+            estado:
+            "Concluido",
 
             fecha:
             new Date()
@@ -139,8 +139,6 @@ async function guardarPedido(){
         }
 
     );
-
-    /* DESCONTAR STOCK */
 
     for(const producto of carritoProductos){
 
@@ -173,8 +171,6 @@ async function guardarPedido(){
         }
 
     }
-
-    /* LIMPIAR */
 
     localStorage.removeItem(
         "carritoTemporal"
