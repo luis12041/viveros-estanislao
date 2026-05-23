@@ -83,6 +83,11 @@ document.getElementById(
     "btnUbicacion"
 );
 
+const btnCerrarSesion =
+document.getElementById(
+    "cerrarSesion"
+);
+
 /* =========================
 SEGURIDAD
 ========================= */
@@ -92,7 +97,7 @@ let intentos = 0;
 let bloqueado = false;
 
 /* =========================
-SI YA HAY SESION
+VERIFICAR SESION
 ========================= */
 
 const sesionActiva =
@@ -107,7 +112,16 @@ localStorage.getItem(
     "correoActivo"
 );
 
+const paginaActual =
+window.location.pathname;
+
+/* SI YA HAY SESION EN LOGIN */
+
 if(
+
+    paginaActual.includes(
+        "index.html"
+    ) &&
 
     sesionActiva === "true"
 
@@ -120,15 +134,56 @@ if(
 
     ){
 
-        window.location.href =
-        "admin.html";
+        window.location.replace(
+            "admin.html"
+        );
 
     }else{
 
-        window.location.href =
-        "catalogo.html";
+        window.location.replace(
+            "catalogo.html"
+        );
 
     }
+
+}
+
+/* =========================
+CERRAR SESION
+========================= */
+
+if(btnCerrarSesion){
+
+    btnCerrarSesion.addEventListener(
+        "click",
+        () => {
+
+            /* BORRAR SESION */
+
+            localStorage.removeItem(
+                "sesionActiva"
+            );
+
+            localStorage.removeItem(
+                "correoActivo"
+            );
+
+            localStorage.removeItem(
+                "usuario"
+            );
+
+            localStorage.removeItem(
+                "carritoTemporal"
+            );
+
+            /* REDIRIGIR */
+
+            window.location.replace(
+                "index.html"
+            );
+
+        }
+    );
 
 }
 
@@ -308,13 +363,15 @@ if(btnLogin){
                     "admin@vivero.com"
                 ){
 
-                    window.location.href =
-                    "admin.html";
+                    window.location.replace(
+                        "admin.html"
+                    );
 
                 }else{
 
-                    window.location.href =
-                    "catalogo.html";
+                    window.location.replace(
+                        "catalogo.html"
+                    );
 
                 }
 
