@@ -27,107 +27,205 @@
 
 <body>
 
-    <!-- CERRAR SESION -->
+    <!-- HEADER PREMIUM -->
 
-    <button 
-        id="cerrarSesion" 
-        class="btn-cerrar"
-    >
+    <header class="header-premium">
 
-        🚪 Cerrar sesión
+        <div class="logo-header">
 
-    </button>
+            <h1>
+                🌿 Viveros Estanislao
+            </h1>
 
-    <header>
+        </div>
 
-        <h1>
-            🌿 Viveros Estanislao
-        </h1>
+        <div class="acciones-header">
 
-        <button id="abrirCarrito">
+            <button 
+                id="abrirCarrito"
+                class="btn-carrito-premium"
+            >
 
-            🛒 <span id="contador">0</span>
+                🛒 
+                <span id="contador">
 
-        </button>
+                    0
+
+                </span>
+
+            </button>
+
+            <button 
+                id="cerrarSesion" 
+                class="btn-cerrar"
+            >
+
+                🚪 Cerrar sesión
+
+            </button>
+
+        </div>
 
     </header>
 
-    <main>
+    <!-- HERO -->
 
-        <section class="hero">
+    <section class="hero-premium">
+
+        <div class="overlay-hero"></div>
+
+        <div class="hero-contenido">
 
             <h2>
                 Catálogo de Plantas
             </h2>
 
             <p>
-                Encuentra plantas para interior y exterior
+                Encuentra plantas para interior, exterior y decoración 🌿
             </p>
 
-        </section>
+        </div>
 
-        <!-- BUSCADOR -->
+    </section>
 
-        <section class="filtros">
+    <!-- PERFIL -->
 
-            <input
-                type="text"
-                id="buscador"
-                placeholder="🔍 Buscar planta..."
-            >
+    <section class="perfil-usuario">
 
-            <select id="filtroLuz">
+        <div>
 
-                <option value="">
-                    Tipo de luz
-                </option>
+            <h3>
+                👤 Cliente conectado
+            </h3>
 
-                <option>
-                    Sol
-                </option>
+            <p>
+                Bienvenido a Viveros Estanislao
+            </p>
 
-                <option>
-                    Sombra
-                </option>
+        </div>
 
-                <option>
-                    Luz indirecta
-                </option>
+        <div>
 
-            </select>
+            🌱 Vive rodeado de naturaleza
 
-            <select id="filtroRiego">
+        </div>
 
-                <option value="">
-                    Tipo de riego
-                </option>
+    </section>
 
-                <option>
-                    Poco riego
-                </option>
+    <!-- CATEGORIAS -->
 
-                <option>
-                    Riego moderado
-                </option>
+    <section class="categorias">
 
-                <option>
-                    Riego frecuente
-                </option>
+        <button class="categoria-btn activa">
 
-            </select>
+            🌿 Todas
 
-        </section>
+        </button>
 
-        <!-- CATALOGO -->
+        <button class="categoria-btn">
 
-        <section 
-            class="catalogo"
-            id="catalogo"
+            🪴 Interior
+
+        </button>
+
+        <button class="categoria-btn">
+
+            ☀️ Exterior
+
+        </button>
+
+        <button class="categoria-btn">
+
+            🌵 Suculentas
+
+        </button>
+
+        <button class="categoria-btn">
+
+            🌸 Decorativas
+
+        </button>
+
+    </section>
+
+    <!-- FILTROS -->
+
+    <section class="filtros">
+
+        <input
+            type="text"
+            id="buscador"
+            placeholder="🔍 Buscar planta..."
         >
 
-        </section>
+        <select id="filtroLuz">
 
-    </main>
+            <option value="">
+                Tipo de luz
+            </option>
+
+            <option>
+                Sol
+            </option>
+
+            <option>
+                Sombra
+            </option>
+
+            <option>
+                Luz indirecta
+            </option>
+
+        </select>
+
+        <select id="filtroRiego">
+
+            <option value="">
+                Tipo de riego
+            </option>
+
+            <option>
+                Poco riego
+            </option>
+
+            <option>
+                Riego moderado
+            </option>
+
+            <option>
+                Riego frecuente
+            </option>
+
+        </select>
+
+    </section>
+
+    <!-- CATALOGO -->
+
+    <section 
+        class="catalogo"
+        id="catalogo"
+    >
+
+    </section>
+
+    <!-- HISTORIAL -->
+
+    <section class="historial">
+
+        <h2>
+            📦 Historial de pedidos
+        </h2>
+
+        <div class="pedido-card">
+
+            <p>
+                Tus pedidos aparecerán aquí próximamente 😎
+            </p>
+
+        </div>
+
+    </section>
 
     <!-- CARRITO -->
 
@@ -165,7 +263,7 @@
 
     </aside>
 
-    <!-- PROTEGER RUTAS -->
+    <!-- PROTEGER -->
 
     <script 
         type="module"

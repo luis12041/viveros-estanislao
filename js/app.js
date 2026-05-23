@@ -1,3 +1,7 @@
+/* =========================
+IMPORTS FIREBASE
+========================= */
+
 import { db } from "../firebase.js";
 
 import {
@@ -12,7 +16,9 @@ import {
 } from
 "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
-/* VARIABLES */
+/* =========================
+VARIABLES
+========================= */
 
 window.imagenURL = "";
 
@@ -67,7 +73,9 @@ document.getElementById("filtroRiego");
 const cerrarSesion =
 document.getElementById("cerrarSesion");
 
-/* CARRITO */
+/* =========================
+CARRITO
+========================= */
 
 let carritoProductos =
 
@@ -81,7 +89,36 @@ JSON.parse(
 
 actualizarCarrito();
 
-/* CERRAR SESION */
+/* =========================
+TOAST
+========================= */
+
+function mostrarToast(texto){
+
+    const toast =
+    document.createElement("div");
+
+    toast.classList.add(
+        "toast"
+    );
+
+    toast.innerText = texto;
+
+    document.body.appendChild(
+        toast
+    );
+
+    setTimeout(() => {
+
+        toast.remove();
+
+    },3000);
+
+}
+
+/* =========================
+CERRAR SESION
+========================= */
 
 if(cerrarSesion){
 
@@ -105,15 +142,25 @@ if(cerrarSesion){
                 "carritoTemporal"
             );
 
-            window.location.href =
-            "index.html";
+            mostrarToast(
+                "Sesión cerrada 👋"
+            );
+
+            setTimeout(() => {
+
+                window.location.href =
+                "index.html";
+
+            },1000);
 
         }
     );
 
 }
 
-/* CALCULAR PRECIO */
+/* =========================
+CALCULAR PRECIO
+========================= */
 
 if(costo && ganancia){
 
@@ -151,7 +198,9 @@ if(costo && ganancia){
 
 }
 
-/* GUARDAR PLANTA */
+/* =========================
+GUARDAR PLANTA
+========================= */
 
 if(botonGuardar){
 
@@ -194,7 +243,7 @@ async function guardarPlanta(){
 
     ){
 
-        alert(
+        mostrarToast(
             "Completa todos los campos"
         );
 
@@ -223,15 +272,21 @@ async function guardarPlanta(){
 
     );
 
-    alert(
-        "Planta guardada correctamente 🌿"
+    mostrarToast(
+        "Planta guardada 🌿"
     );
 
-    location.reload();
+    setTimeout(() => {
+
+        location.reload();
+
+    },1200);
 
 }
 
-/* CARRITO */
+/* =========================
+ABRIR CARRITO
+========================= */
 
 if(abrirCarrito){
 
@@ -263,7 +318,9 @@ if(cerrarCarrito){
 
 }
 
-/* FILTROS */
+/* =========================
+FILTROS
+========================= */
 
 if(buscador){
 
@@ -292,7 +349,9 @@ if(filtroRiego){
 
 }
 
-/* MOSTRAR PLANTAS */
+/* =========================
+MOSTRAR PLANTAS
+========================= */
 
 if(catalogo){
 
@@ -325,7 +384,9 @@ async function mostrarPlantas(){
 
 }
 
-/* FILTRAR */
+/* =========================
+FILTRAR
+========================= */
 
 async function filtrarPlantas(){
 
@@ -392,7 +453,9 @@ async function filtrarPlantas(){
 
 }
 
-/* RENDERIZAR */
+/* =========================
+RENDERIZAR
+========================= */
 
 function renderizarPlantas(plantas){
 
@@ -459,16 +522,14 @@ function renderizarPlantas(plantas){
 
             <div class="card">
 
+                <button class="btn-favorito">
+
+                    ❤️
+
+                </button>
+
                 <img 
                     src="${planta.imagen}"
-                    onclick='abrirModal(
-                        "${planta.nombre}",
-                        "${planta.precio}",
-                        "${planta.descripcion}",
-                        "${planta.riego}",
-                        "${planta.luz}",
-                        "${planta.imagen}"
-                    )'
                 >
 
                 <div class="info">
@@ -492,6 +553,31 @@ function renderizarPlantas(plantas){
 
                     ${alertaStock}
 
+                    <button 
+                        class="btn-info"
+                        onclick="toggleInfo(this)"
+                    >
+
+                        Ver información
+
+                    </button>
+
+                    <div class="info-extra">
+
+                        <p>
+                            💧 ${planta.riego}
+                        </p>
+
+                        <p>
+                            ☀️ ${planta.luz}
+                        </p>
+
+                        <p>
+                            🌿 ${planta.descripcion}
+                        </p>
+
+                    </div>
+
                     ${botonStock}
 
                 </div>
@@ -504,7 +590,25 @@ function renderizarPlantas(plantas){
 
 }
 
-/* AGREGAR CARRITO */
+/* =========================
+INFO DESPLEGABLE
+========================= */
+
+window.toggleInfo = function(btn){
+
+    const info =
+
+    btn.nextElementSibling;
+
+    info.classList.toggle(
+        "activa"
+    );
+
+};
+
+/* =========================
+AGREGAR CARRITO
+========================= */
 
 window.agregarCarrito = function(
 
@@ -536,9 +640,15 @@ window.agregarCarrito = function(
 
     actualizarCarrito();
 
+    mostrarToast(
+        "Producto agregado 🛒"
+    );
+
 };
 
-/* ACTUALIZAR CARRITO */
+/* =========================
+ACTUALIZAR CARRITO
+========================= */
 
 function actualizarCarrito(){
 
@@ -592,7 +702,9 @@ function actualizarCarrito(){
 
 }
 
-/* ELIMINAR PRODUCTO */
+/* =========================
+ELIMINAR PRODUCTO
+========================= */
 
 window.eliminarProducto = function(index){
 
@@ -608,9 +720,15 @@ window.eliminarProducto = function(index){
 
     actualizarCarrito();
 
+    mostrarToast(
+        "Producto eliminado ❌"
+    );
+
 };
 
-/* MODAL */
+/* =========================
+MODAL
+========================= */
 
 window.abrirModal = function(
 
@@ -675,7 +793,9 @@ window.abrirModal = function(
 
 };
 
-/* PEDIDOS */
+/* =========================
+PEDIDOS
+========================= */
 
 if(listaPedidos){
 
@@ -742,7 +862,9 @@ async function mostrarPedidos(){
 
 }
 
-/* ENTREGAR */
+/* =========================
+ENTREGAR
+========================= */
 
 window.entregarPedido =
 async function(id){
@@ -753,9 +875,15 @@ async function(id){
 
     mostrarPedidos();
 
+    mostrarToast(
+        "Pedido entregado ✅"
+    );
+
 };
 
-/* INVENTARIO */
+/* =========================
+INVENTARIO
+========================= */
 
 if(listaInventario){
 
@@ -839,7 +967,9 @@ async function mostrarInventario(){
 
 }
 
-/* ELIMINAR */
+/* =========================
+ELIMINAR PLANTA
+========================= */
 
 window.eliminarPlanta =
 async function(id){
@@ -859,9 +989,15 @@ async function(id){
 
     mostrarPlantas();
 
+    mostrarToast(
+        "Planta eliminada 🗑️"
+    );
+
 };
 
-/* EDITAR */
+/* =========================
+EDITAR PLANTA
+========================= */
 
 window.editarPlanta =
 async function(
@@ -913,7 +1049,7 @@ async function(
 
     );
 
-    alert(
+    mostrarToast(
         "Planta actualizada 🌿"
     );
 
