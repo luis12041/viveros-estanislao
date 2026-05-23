@@ -129,8 +129,8 @@ async function guardarPedido(){
 
             total,
 
-            estado:
-            "Pendiente",
+      estado:
+"Concluido",
 
             fecha:
             new Date()

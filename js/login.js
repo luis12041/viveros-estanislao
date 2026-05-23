@@ -173,18 +173,18 @@ btnLogin.addEventListener(
 
             intentos = 0;
 
-            localStorage.setItem(
-                "sesionActiva",
-                "true"
-            );
+sessionStorage.setItem(
+    "sesionActiva",
+    "true"
+);
 
-            localStorage.setItem(
+sessionStorage.setItem(
 
-                "correoActivo",
+    "correoActivo",
 
-                correo
+    correo
 
-            );
+);
 
             if(
                 correo ===
@@ -379,12 +379,12 @@ btnRecuperar.addEventListener(
 /* SESION ACTIVA */
 
 const sesionActiva =
-localStorage.getItem(
+sessionStorage.getItem(
     "sesionActiva"
 );
 
 const correoActivo =
-localStorage.getItem(
+sessionStorage.getItem(
     "correoActivo"
 );
 

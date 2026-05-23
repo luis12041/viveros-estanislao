@@ -87,13 +87,13 @@ if(cerrarSesion){
         "click",
         () => {
 
-            localStorage.removeItem(
-                "sesionActiva"
-            );
+sessionStorage.removeItem(
+    "sesionActiva"
+);
 
-            localStorage.removeItem(
-                "correoActivo"
-            );
+sessionStorage.removeItem(
+    "correoActivo"
+);
 
             localStorage.removeItem(
                 "usuario"
