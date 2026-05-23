@@ -67,6 +67,8 @@ document.getElementById("filtroRiego");
 const cerrarSesion =
 document.getElementById("cerrarSesion");
 
+/* CARRITO */
+
 let carritoProductos =
 
 JSON.parse(
@@ -87,13 +89,13 @@ if(cerrarSesion){
         "click",
         () => {
 
-sessionStorage.removeItem(
-    "sesionActiva"
-);
+            sessionStorage.removeItem(
+                "sesionActiva"
+            );
 
-sessionStorage.removeItem(
-    "correoActivo"
-);
+            sessionStorage.removeItem(
+                "correoActivo"
+            );
 
             localStorage.removeItem(
                 "usuario"
@@ -229,25 +231,35 @@ async function guardarPlanta(){
 
 }
 
-/* ABRIR CARRITO */
+/* CARRITO */
 
 if(abrirCarrito){
 
-    abrirCarrito.addEventListener("click", () => {
+    abrirCarrito.addEventListener(
+        "click",
+        () => {
 
-        carrito.classList.add("activo");
+            carrito.classList.add(
+                "activo"
+            );
 
-    });
+        }
+    );
 
 }
 
 if(cerrarCarrito){
 
-    cerrarCarrito.addEventListener("click", () => {
+    cerrarCarrito.addEventListener(
+        "click",
+        () => {
 
-        carrito.classList.remove("activo");
+            carrito.classList.remove(
+                "activo"
+            );
 
-    });
+        }
+    );
 
 }
 
@@ -663,7 +675,7 @@ window.abrirModal = function(
 
 };
 
-/* PEDIDOS ADMIN */
+/* PEDIDOS */
 
 if(listaPedidos){
 
@@ -730,7 +742,7 @@ async function mostrarPedidos(){
 
 }
 
-/* ENTREGAR PEDIDO */
+/* ENTREGAR */
 
 window.entregarPedido =
 async function(id){
@@ -743,7 +755,7 @@ async function(id){
 
 };
 
-/* INVENTARIO ADMIN */
+/* INVENTARIO */
 
 if(listaInventario){
 
@@ -764,22 +776,6 @@ async function mostrarInventario(){
 
         const planta =
         docu.data();
-
-        let alerta = "";
-
-        if(Number(planta.stock) <= 30){
-
-            alerta = `
-
-                <p class="stock-bajo">
-
-                    ⚠️ Poco stock
-
-                </p>
-
-            `;
-
-        }
 
         listaInventario.innerHTML += `
 
@@ -803,8 +799,6 @@ async function mostrarInventario(){
                         📦 Stock:
                         ${planta.stock}
                     </p>
-
-                    ${alerta}
 
                 </div>
 
@@ -845,7 +839,7 @@ async function mostrarInventario(){
 
 }
 
-/* ELIMINAR PLANTA */
+/* ELIMINAR */
 
 window.eliminarPlanta =
 async function(id){
@@ -867,7 +861,7 @@ async function(id){
 
 };
 
-/* EDITAR PLANTA */
+/* EDITAR */
 
 window.editarPlanta =
 async function(
