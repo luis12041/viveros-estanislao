@@ -1502,3 +1502,114 @@ ESTADOS PEDIDOS
     cursor:pointer;
 
 }
+/* =========================
+PEDIDOS PRO
+========================= */
+
+.pedido{
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    border-left:8px solid #2e7d32;
+
+}
+
+.pedido h3{
+
+    color:#1b1b1b;
+
+    margin-bottom:10px;
+
+    font-size:24px;
+
+}
+
+.pedido p{
+
+    color:#555;
+
+    margin:8px 0;
+
+}
+
+.estado-box{
+
+    margin-top:20px;
+
+}
+
+.estado-texto{
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    margin-bottom:10px;
+
+}
+
+.estado-pendiente{
+
+    background:#fff3cd;
+
+    color:#ff9800;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+}
+
+.estado-enviado{
+
+    background:#dbeafe;
+
+    color:#1565c0;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+}
+
+.estado-entregado{
+
+    background:#dcfce7;
+
+    color:#2e7d32;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+}
+
+.pedido select{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:#f4f7fb;
+
+    font-size:16px;
+
+    margin-top:10px;
+
+    outline:none;
+
+    cursor:pointer;
+
+}

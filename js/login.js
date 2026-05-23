@@ -1,3 +1,7 @@
+/* =========================
+FIREBASE
+========================= */
+
 import {
 
     initializeApp
@@ -13,12 +17,16 @@ import {
 
     createUserWithEmailAndPassword,
 
-    sendPasswordResetEmail
+    sendPasswordResetEmail,
+
+    updateProfile
 
 } from
 "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
-/* FIREBASE */
+/* =========================
+CONFIG
+========================= */
 
 const firebaseConfig = {
 
@@ -51,27 +59,43 @@ initializeApp(firebaseConfig);
 const auth =
 getAuth(app);
 
-/* BOTONES */
+/* =========================
+BOTONES
+========================= */
 
 const btnLogin =
-document.getElementById("btnLogin");
+document.getElementById(
+    "btnLogin"
+);
 
 const btnRegistro =
-document.getElementById("btnRegistro");
+document.getElementById(
+    "btnRegistro"
+);
 
 const btnRecuperar =
-document.getElementById("btnRecuperar");
+document.getElementById(
+    "btnRecuperar"
+);
 
 const btnUbicacion =
-document.getElementById("btnUbicacion");
+document.getElementById(
+    "btnUbicacion"
+);
 
-/* SEGURIDAD */
+/* =========================
+SEGURIDAD
+========================= */
 
 let intentos = 0;
 
 let bloqueado = false;
 
-/* UBICACION */
+/* =========================
+UBICACION
+========================= */
+
+let ubicacionGuardada = null;
 
 btnUbicacion.addEventListener(
     "click",
@@ -87,21 +111,25 @@ btnUbicacion.addEventListener(
                 const lng =
                 posicion.coords.longitude;
 
+                ubicacionGuardada = {
+
+                    lat,
+                    lng
+
+                };
+
                 localStorage.setItem(
 
                     "ubicacion",
 
-                    JSON.stringify({
-
-                        lat,
-                        lng
-
-                    })
+                    JSON.stringify(
+                        ubicacionGuardada
+                    )
 
                 );
 
                 alert(
-                    "Ubicación guardada correctamente 📍"
+                    "Ubicación guardada 📍"
                 );
 
             },
@@ -119,7 +147,9 @@ btnUbicacion.addEventListener(
     }
 );
 
-/* LOGIN */
+/* =========================
+LOGIN
+========================= */
 
 btnLogin.addEventListener(
     "click",
@@ -163,6 +193,8 @@ btnLogin.addEventListener(
 
         try{
 
+            const userCredential =
+
             await signInWithEmailAndPassword(
 
                 auth,
@@ -171,7 +203,12 @@ btnLogin.addEventListener(
 
             );
 
+            const usuario =
+            userCredential.user;
+
             intentos = 0;
+
+            /* SESION */
 
             sessionStorage.setItem(
                 "sesionActiva",
@@ -182,6 +219,34 @@ btnLogin.addEventListener(
                 "correoActivo",
                 correo
             );
+
+            /* USUARIO */
+
+            localStorage.setItem(
+
+                "usuario",
+
+                JSON.stringify({
+
+                    nombre:
+                    usuario.displayName ||
+                    "Cliente",
+
+                    correo:
+                    usuario.email,
+
+                    ubicacion:
+                    JSON.parse(
+                        localStorage.getItem(
+                            "ubicacion"
+                        )
+                    ) || null
+
+                })
+
+            );
+
+            /* ADMIN */
 
             if(
                 correo ===
@@ -226,7 +291,7 @@ btnLogin.addEventListener(
 
                     intentos = 0;
 
-                }, 60000);
+                },60000);
 
             }
 
@@ -235,7 +300,9 @@ btnLogin.addEventListener(
     }
 );
 
-/* REGISTRO */
+/* =========================
+REGISTRO
+========================= */
 
 btnRegistro.addEventListener(
     "click",
@@ -274,6 +341,8 @@ btnRegistro.addEventListener(
 
         try{
 
+            const userCredential =
+
             await createUserWithEmailAndPassword(
 
                 auth,
@@ -281,6 +350,22 @@ btnRegistro.addEventListener(
                 password
 
             );
+
+            /* GUARDAR NOMBRE */
+
+            await updateProfile(
+
+                userCredential.user,
+
+                {
+
+                    displayName:nombre
+
+                }
+
+            );
+
+            /* LOCAL */
 
             localStorage.setItem(
 
@@ -290,10 +375,14 @@ btnRegistro.addEventListener(
 
                     nombre,
 
-                    direccion:
-                    "Ubicación GPS",
+                    correo,
 
-                    correo
+                    ubicacion:
+                    JSON.parse(
+                        localStorage.getItem(
+                            "ubicacion"
+                        )
+                    ) || null
 
                 })
 
@@ -328,7 +417,9 @@ btnRegistro.addEventListener(
     }
 );
 
-/* RECUPERAR */
+/* =========================
+RECUPERAR
+========================= */
 
 btnRecuperar.addEventListener(
     "click",

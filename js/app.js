@@ -868,6 +868,22 @@ CAMBIAR ESTADO
 window.cambiarEstado =
 async function(id,estado){
 
+    if(
+        estado === "Entregado"
+    ){
+
+        await deleteDoc(
+            doc(db,"pedidos",id)
+        );
+
+        mostrarToast(
+            "Pedido entregado ✅"
+        );
+
+        return;
+
+    }
+
     await updateDoc(
 
         doc(db,"pedidos",id),
