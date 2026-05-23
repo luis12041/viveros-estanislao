@@ -23,245 +23,302 @@
 
 <body>
 
-    <!-- CERRAR SESION -->
+    <!-- SIDEBAR -->
 
-    <button 
-        id="cerrarSesion" 
-        class="btn-cerrar"
-    >
+    <aside class="sidebar">
 
-        🚪 Cerrar sesión
+        <h2>
+            🌿 Admin
+        </h2>
 
-    </button>
+        <button onclick="mostrarSeccion('dashboard')">
 
-    <header>
+            📊 Dashboard
 
-        <h1>
-            🛠️ Panel Administrador
-        </h1>
+        </button>
 
-    </header>
+        <button onclick="mostrarSeccion('productos')">
 
-    <!-- ESTADISTICAS -->
+            🌿 Productos
 
-    <section class="estadisticas">
+        </button>
 
-        <div class="estadistica-card">
+        <button onclick="mostrarSeccion('agregar')">
 
-            <h3>
-                💰 Total vendido
-            </h3>
+            ➕ Agregar Planta
 
-            <p id="totalVendido">
+        </button>
 
-                $0
+        <button onclick="mostrarSeccion('pedidos')">
 
-            </p>
+            📦 Pedidos
 
-        </div>
+        </button>
 
-        <div class="estadistica-card">
+        <button id="cerrarSesion" class="btn-cerrar">
 
-            <h3>
-                📦 Pedidos
-            </h3>
+            🚪 Cerrar sesión
 
-            <p id="totalPedidos">
+        </button>
 
-                0
+    </aside>
 
-            </p>
+    <!-- CONTENIDO -->
 
-        </div>
+    <div class="contenido-admin">
 
-        <div class="estadistica-card">
+        <header>
 
-            <h3>
-                🌿 Plantas
-            </h3>
+            <h1>
+                🛠️ Panel Administrador
+            </h1>
 
-            <p id="totalPlantas">
+        </header>
 
-                0
+        <!-- DASHBOARD -->
 
-            </p>
+        <section 
+            id="dashboard"
+            class="seccion-admin activa"
+        >
 
-        </div>
+            <section class="estadisticas">
 
-        <div class="estadistica-card">
+                <div class="estadistica-card">
 
-            <h3>
-                🏆 Más vendido
-            </h3>
+                    <h3>
+                        💰 Total vendido
+                    </h3>
 
-            <p id="productoTop">
+                    <p id="totalVendido">
 
-                Ninguno
+                        $0
 
-            </p>
+                    </p>
 
-        </div>
+                </div>
 
-    </section>
+                <div class="estadistica-card">
 
-    <!-- GRAFICAS -->
+                    <h3>
+                        📦 Pedidos
+                    </h3>
 
-    <section class="graficas">
+                    <p id="totalPedidos">
 
-        <div class="grafica-card">
+                        0
 
-            <h2>
-                📈 Ventas
-            </h2>
+                    </p>
 
-            <canvas id="graficaVentas">
+                </div>
 
-            </canvas>
+                <div class="estadistica-card">
 
-        </div>
+                    <h3>
+                        🌿 Plantas
+                    </h3>
 
-    </section>
+                    <p id="totalPlantas">
 
-    <main>
+                        0
 
-        <!-- FORMULARIO -->
+                    </p>
 
-        <section class="formulario">
+                </div>
 
-            <h2>
-                Agregar Planta
-            </h2>
+                <div class="estadistica-card">
 
-            <input
-                type="text"
-                id="nombre"
-                placeholder="Nombre de la planta"
-            >
+                    <h3>
+                        🏆 Más vendido
+                    </h3>
 
-            <div class="grupo-precios">
+                    <p id="productoTop">
 
-                <input
-                    type="number"
-                    id="costo"
-                    placeholder="Costo de la planta"
-                >
+                        Ninguno
 
-                <input
-                    type="number"
-                    id="ganancia"
-                    placeholder="% de ganancia"
-                >
+                    </p>
 
-            </div>
+                </div>
 
-            <input
-                type="number"
-                id="precio"
-                placeholder="Precio final"
-                readonly
-            >
+            </section>
 
-            <input
-                type="number"
-                id="stock"
-                placeholder="Cantidad disponible"
-            >
+            <section class="graficas">
 
-            <textarea
-                id="descripcion"
-                placeholder="Descripción de la planta"
-            ></textarea>
+                <div class="grafica-card">
 
-            <select id="riego">
+                    <h2>
+                        📈 Ventas
+                    </h2>
 
-                <option value="">
-                    Tipo de riego
-                </option>
+                    <canvas id="graficaVentas">
 
-                <option>
-                    Poco riego
-                </option>
+                    </canvas>
 
-                <option>
-                    Riego moderado
-                </option>
+                </div>
 
-                <option>
-                    Riego frecuente
-                </option>
-
-            </select>
-
-            <select id="luz">
-
-                <option value="">
-                    Tipo de luz
-                </option>
-
-                <option>
-                    Sol
-                </option>
-
-                <option>
-                    Sombra
-                </option>
-
-                <option>
-                    Luz indirecta
-                </option>
-
-            </select>
-
-            <input
-                type="file"
-                id="imagen"
-                accept="image/*"
-            >
-
-            <img 
-                id="preview"
-                alt="Vista previa"
-            >
-
-            <button id="guardar">
-
-                Guardar Planta
-
-            </button>
+            </section>
 
         </section>
 
-        <!-- INVENTARIO -->
+        <!-- AGREGAR -->
 
-        <section class="inventario-admin">
+        <section 
+            id="agregar"
+            class="seccion-admin"
+        >
 
-            <h2>
-                🌿 Inventario
-            </h2>
+            <section class="formulario">
 
-            <div id="listaInventario">
+                <h2>
+                    Agregar Planta
+                </h2>
 
-            </div>
+                <input
+                    type="text"
+                    id="nombre"
+                    placeholder="Nombre de la planta"
+                >
+
+                <div class="grupo-precios">
+
+                    <input
+                        type="number"
+                        id="costo"
+                        placeholder="Costo de la planta"
+                    >
+
+                    <input
+                        type="number"
+                        id="ganancia"
+                        placeholder="% de ganancia"
+                    >
+
+                </div>
+
+                <input
+                    type="number"
+                    id="precio"
+                    placeholder="Precio final"
+                    readonly
+                >
+
+                <input
+                    type="number"
+                    id="stock"
+                    placeholder="Cantidad disponible"
+                >
+
+                <textarea
+                    id="descripcion"
+                    placeholder="Descripción"
+                ></textarea>
+
+                <select id="riego">
+
+                    <option value="">
+                        Tipo de riego
+                    </option>
+
+                    <option>
+                        Poco riego
+                    </option>
+
+                    <option>
+                        Riego moderado
+                    </option>
+
+                    <option>
+                        Riego frecuente
+                    </option>
+
+                </select>
+
+                <select id="luz">
+
+                    <option value="">
+                        Tipo de luz
+                    </option>
+
+                    <option>
+                        Sol
+                    </option>
+
+                    <option>
+                        Sombra
+                    </option>
+
+                    <option>
+                        Luz indirecta
+                    </option>
+
+                </select>
+
+                <input
+                    type="file"
+                    id="imagen"
+                    accept="image/*"
+                >
+
+                <img 
+                    id="preview"
+                    alt="Vista previa"
+                >
+
+                <button id="guardar">
+
+                    Guardar Planta
+
+                </button>
+
+            </section>
+
+        </section>
+
+        <!-- PRODUCTOS -->
+
+        <section 
+            id="productos"
+            class="seccion-admin"
+        >
+
+            <section class="inventario-admin">
+
+                <h2>
+                    🌿 Inventario
+                </h2>
+
+                <div id="listaInventario">
+
+                </div>
+
+            </section>
 
         </section>
 
         <!-- PEDIDOS -->
 
-        <section class="pedidos-admin">
+        <section 
+            id="pedidos"
+            class="seccion-admin"
+        >
 
-            <h2>
-                📦 Pedidos realizados
-            </h2>
+            <section class="pedidos-admin">
 
-            <div id="listaPedidos">
+                <h2>
+                    📦 Pedidos realizados
+                </h2>
 
-            </div>
+                <div id="listaPedidos">
+
+                </div>
+
+            </section>
 
         </section>
 
-    </main>
+    </div>
 
-    <!-- PROTEGER RUTAS -->
+    <!-- PROTEGER -->
 
     <script 
         type="module"
@@ -276,6 +333,32 @@
         type="module"
         src="js/app.js"
     ></script>
+
+    <script>
+
+        function mostrarSeccion(id){
+
+            const secciones =
+            document.querySelectorAll(
+                ".seccion-admin"
+            );
+
+            secciones.forEach(sec => {
+
+                sec.classList.remove(
+                    "activa"
+                );
+
+            });
+
+            document.getElementById(id)
+            .classList.add(
+                "activa"
+            );
+
+        }
+
+    </script>
 
 </body>
 </html>
