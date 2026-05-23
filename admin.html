@@ -27,57 +27,61 @@
 
     <aside class="sidebar-admin">
 
-        <div class="logo-admin">
+        <div>
 
-            <h2>
-                🌿 Viveros
-            </h2>
+            <div class="logo-admin">
 
-            <p>
-                Panel Administrativo
-            </p>
+                <h2>
+                    🌿 Viveros
+                </h2>
+
+                <p>
+                    Panel Administrativo
+                </p>
+
+            </div>
+
+            <nav class="menu-admin">
+
+                <button 
+                    class="menu-btn activo"
+                    onclick="mostrarSeccion('dashboard',this)"
+                >
+
+                    📊 Dashboard
+
+                </button>
+
+                <button 
+                    class="menu-btn"
+                    onclick="mostrarSeccion('productos',this)"
+                >
+
+                    🌿 Inventario
+
+                </button>
+
+                <button 
+                    class="menu-btn"
+                    onclick="mostrarSeccion('agregar',this)"
+                >
+
+                    ➕ Agregar Planta
+
+                </button>
+
+                <button 
+                    class="menu-btn"
+                    onclick="mostrarSeccion('pedidos',this)"
+                >
+
+                    📦 Pedidos
+
+                </button>
+
+            </nav>
 
         </div>
-
-        <nav class="menu-admin">
-
-            <button 
-                class="menu-btn activo"
-                onclick="mostrarSeccion('dashboard',this)"
-            >
-
-                📊 Dashboard
-
-            </button>
-
-            <button 
-                class="menu-btn"
-                onclick="mostrarSeccion('productos',this)"
-            >
-
-                🌿 Inventario
-
-            </button>
-
-            <button 
-                class="menu-btn"
-                onclick="mostrarSeccion('agregar',this)"
-            >
-
-                ➕ Agregar Planta
-
-            </button>
-
-            <button 
-                class="menu-btn"
-                onclick="mostrarSeccion('pedidos',this)"
-            >
-
-                📦 Pedidos
-
-            </button>
-
-        </nav>
 
         <button 
             id="cerrarSesion"
@@ -105,7 +109,7 @@
                 </h1>
 
                 <p>
-                    Gestiona tu vivero de manera profesional
+                    Gestiona tu vivero de manera profesional 🌿
                 </p>
 
             </div>
@@ -134,7 +138,9 @@
                         </h3>
 
                         <p id="totalVendido">
+
                             $0
+
                         </p>
 
                     </div>
@@ -154,7 +160,9 @@
                         </h3>
 
                         <p id="totalPedidos">
+
                             0
+
                         </p>
 
                     </div>
@@ -174,7 +182,9 @@
                         </h3>
 
                         <p id="totalPlantas">
+
                             0
+
                         </p>
 
                     </div>
@@ -194,7 +204,9 @@
                         </h3>
 
                         <p id="productoTop">
+
                             Ninguno
+
                         </p>
 
                     </div>
@@ -202,6 +214,8 @@
                 </div>
 
             </div>
+
+            <!-- GRAFICA -->
 
             <div class="grafica-pro">
 
@@ -231,7 +245,7 @@
                 </h2>
 
                 <p>
-                    Administra las plantas registradas
+                    Administra todas las plantas registradas
                 </p>
 
             </div>
@@ -287,12 +301,12 @@
                 <input
                     type="number"
                     id="stock"
-                    placeholder="Stock"
+                    placeholder="Cantidad disponible"
                 >
 
                 <textarea
                     id="descripcion"
-                    placeholder="Descripción"
+                    placeholder="Descripción de la planta"
                 ></textarea>
 
                 <select id="riego">
@@ -370,7 +384,7 @@
                 </h2>
 
                 <p>
-                    Control de pedidos realizados
+                    Control y seguimiento de pedidos
                 </p>
 
             </div>
@@ -390,38 +404,46 @@
         src="js/auth.js"
     ></script>
 
+    <!-- CHART -->
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- CLOUDINARY -->
+
     <script src="cloudinary.js"></script>
+
+    <!-- APP -->
 
     <script 
         type="module"
         src="js/app.js"
     ></script>
 
+    <!-- SECCIONES -->
+
     <script>
 
         function mostrarSeccion(id,btn){
 
             const secciones =
+
             document.querySelectorAll(
                 ".seccion-admin"
             );
 
             secciones.forEach(sec => {
 
-                sec.classList.remove(
-                    "activa"
-                );
+                sec.style.display =
+                "none";
 
             });
 
             document.getElementById(id)
-            .classList.add(
-                "activa"
-            );
+            .style.display =
+            "block";
 
             const botones =
+
             document.querySelectorAll(
                 ".menu-btn"
             );
@@ -439,6 +461,22 @@
             );
 
         }
+
+        /* INICIO */
+
+        document.querySelectorAll(
+            ".seccion-admin"
+        ).forEach(sec => {
+
+            sec.style.display =
+            "none";
+
+        });
+
+        document.getElementById(
+            "dashboard"
+        ).style.display =
+        "block";
 
     </script>
 
