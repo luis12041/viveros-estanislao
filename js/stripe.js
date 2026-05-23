@@ -38,7 +38,7 @@ if(finalizarCompra){
                 const response =
                 await fetch(
 
-                    "http://localhost:3000/crear-pago",
+                    "https://backend-viveros.onrender.com/crear-pago",
 
                     {
 
