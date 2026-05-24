@@ -167,6 +167,14 @@ async function guardarTokenAdmin(){
             "tokenNotificacion"
         );
 
+        console.log(
+            "🔥 TOKEN ENCONTRADO:"
+        );
+
+        console.log(
+            token
+        );
+
         if(
             !token
         ){
@@ -212,6 +220,10 @@ async function guardarTokenAdmin(){
     }catch(error){
 
         console.log(
+            "❌ ERROR GUARDANDO TOKEN"
+        );
+
+        console.log(
             error
         );
 
@@ -223,4 +235,8 @@ async function guardarTokenAdmin(){
 ACTIVAR
 ========================= */
 
-guardarTokenAdmin();
+setTimeout(() => {
+
+    guardarTokenAdmin();
+
+},5000);

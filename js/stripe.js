@@ -1,4 +1,3 @@
-alert("stripe conectado");
 const stripe = Stripe(
     "pk_test_51TZljrDgvnZjTIsjfco8dMzlMHszOd5tSbGz5uHhDZEuOBNcxDyfInkHX7f2byBzwttb9AC9TAlMDV1bMCwhsVTx00OKTM0ZJC"
 );
