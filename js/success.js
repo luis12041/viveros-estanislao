@@ -1,3 +1,7 @@
+/* =========================
+FIREBASE
+========================= */
+
 import {
 
     initializeApp
@@ -22,7 +26,9 @@ import {
 } from
 "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
-/* FIREBASE */
+/* =========================
+FIREBASE CONFIG
+========================= */
 
 const firebaseConfig = {
 
@@ -55,7 +61,9 @@ initializeApp(firebaseConfig);
 const db =
 getFirestore(app);
 
-/* DATOS */
+/* =========================
+DATOS
+========================= */
 
 const carritoProductos =
 
@@ -87,95 +95,189 @@ JSON.parse(
 
 );
 
-/* GUARDAR PEDIDO */
+/* =========================
+GUARDAR PEDIDO
+========================= */
 
 async function guardarPedido(){
+
+    /* SI NO HAY PRODUCTOS */
 
     if(
         carritoProductos.length === 0
     ){
+
         return;
+
     }
 
-    let total = 0;
+    try{
 
-    carritoProductos.forEach(
-        producto => {
+        /* TOTAL */
 
-            total +=
-            Number(producto.precio);
+        let total = 0;
 
-        }
-    );
+        carritoProductos.forEach(
+            producto => {
 
-    await addDoc(
+                total +=
+                Number(producto.precio);
 
-        collection(db,"pedidos"),
-
-        {
-
-            cliente:
-            usuario?.nombre ||
-            "Cliente",
-
-            correo:
-            usuario?.correo ||
-            "Sin correo",
-
-            ubicacion,
-
-            productos:
-            carritoProductos,
-
-            total,
-
-            estado:
-            "Concluido",
-
-            fecha:
-            new Date()
-            .toLocaleDateString()
-
-        }
-
-    );
-
-    for(const producto of carritoProductos){
-
-        const ref = doc(
-            db,
-            "plantas",
-            producto.id
+            }
         );
 
-        const snap =
-        await getDoc(ref);
+        /* GUARDAR PEDIDO */
 
-        if(
-            snap.exists()
-        ){
+        await addDoc(
 
-            const stockActual =
-            snap.data().stock;
+            collection(db,"pedidos"),
 
-            const nuevoStock =
-            stockActual - 1;
+            {
 
-            await updateDoc(
-                ref,
+                cliente:
+                usuario?.nombre ||
+                "Cliente",
+
+                correo:
+                usuario?.correo ||
+                "Sin correo",
+
+                ubicacion:
+
+                ubicacion ||
+
                 {
-                    stock:nuevoStock
-                }
+
+                    direccion:
+
+                    document.getElementById(
+                        "direccionEntrega"
+                    )?.value ||
+
+                    "Sin dirección"
+
+                },
+
+                productos:
+                carritoProductos,
+
+                total,
+
+                estado:
+                "Pendiente",
+
+                fecha:
+                new Date()
+                .toLocaleDateString(),
+
+                timestamp:
+                Date.now()
+
+            }
+
+        );
+
+        /* =========================
+        RESTAR STOCK
+        ========================= */
+
+        for(const producto of carritoProductos){
+
+            /* VALIDAR ID */
+
+            if(!producto.id){
+
+                continue;
+
+            }
+
+            const ref = doc(
+
+                db,
+
+                "plantas",
+
+                producto.id
+
             );
+
+            const snap =
+            await getDoc(ref);
+
+            /* EXISTE */
+
+            if(
+                snap.exists()
+            ){
+
+                const data =
+                snap.data();
+
+                const stockActual =
+
+                Number(
+                    data.stock
+                ) || 0;
+
+                /* NUEVO STOCK */
+
+                let nuevoStock =
+                stockActual - 1;
+
+                /* EVITAR NEGATIVOS */
+
+                if(
+                    nuevoStock < 0
+                ){
+
+                    nuevoStock = 0;
+
+                }
+
+                /* ACTUALIZAR */
+
+                await updateDoc(
+
+                    ref,
+
+                    {
+
+                        stock:
+                        nuevoStock
+
+                    }
+
+                );
+
+            }
 
         }
 
+        /* =========================
+        LIMPIAR CARRITO
+        ========================= */
+
+        localStorage.removeItem(
+            "carritoTemporal"
+        );
+
+        console.log(
+            "Pedido guardado correctamente 🌿"
+        );
+
+    }catch(error){
+
+        console.log(
+            "Error al guardar pedido",
+            error
+        );
+
     }
 
-    localStorage.removeItem(
-        "carritoTemporal"
-    );
-
 }
+
+/* =========================
+INICIAR
+========================= */
 
 guardarPedido();
