@@ -2442,3 +2442,222 @@ MOBILE
     }
 
 }
+/* ========================================
+MEJORAS PREMIUM
+======================================== */
+
+.logo-header p{
+
+    color:rgba(255,255,255,.8);
+
+    margin-top:5px;
+
+    font-size:14px;
+
+}
+
+.hero-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,.3),
+        rgba(0,0,0,.4)
+    );
+
+}
+
+.hero-contenido{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.perfil-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
+
+}
+
+.perfil-acciones{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.filtros{
+
+    position:sticky;
+
+    top:95px;
+
+    z-index:998;
+
+    background:#f4f7fb;
+
+    padding:10px 0;
+
+}
+
+.titulo-seccion-catalogo{
+
+    background:white;
+
+    padding:18px 25px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 10px 20px rgba(0,0,0,.05);
+
+}
+
+.card{
+
+    border:1px solid rgba(0,0,0,.05);
+
+}
+
+.card:hover{
+
+    transform:
+    translateY(-8px);
+
+}
+
+.btn-favorito{
+
+    transition:.3s;
+
+}
+
+.btn-favorito:hover{
+
+    transform:scale(1.1);
+
+}
+
+.carrito{
+
+    backdrop-filter:blur(10px);
+
+}
+
+.modal-historial{
+
+    backdrop-filter:blur(8px);
+
+}
+
+.historial-item{
+
+    transition:.3s;
+
+}
+
+.historial-item:hover{
+
+    transform:translateY(-5px);
+
+}
+
+/* ========================================
+MOVIL PREMIUM
+======================================== */
+
+@media screen and (max-width:768px){
+
+    .header-premium{
+
+        padding:16px;
+
+        gap:15px;
+
+    }
+
+    .logo-header h1{
+
+        font-size:32px;
+
+    }
+
+    .acciones-header{
+
+        justify-content:center;
+
+    }
+
+    .hero-premium{
+
+        padding:50px 20px;
+
+    }
+
+    .hero-contenido h2{
+
+        font-size:30px;
+
+    }
+
+    .hero-contenido p{
+
+        font-size:15px;
+
+    }
+
+    .perfil-usuario{
+
+        padding:18px;
+
+        gap:15px;
+
+    }
+
+    .perfil-acciones{
+
+        width:100%;
+
+        flex-direction:column;
+
+    }
+
+    .btn-cerrar{
+
+        width:100%;
+
+    }
+
+    .titulo-seccion-catalogo{
+
+        font-size:24px;
+
+        padding:15px 18px;
+
+    }
+
+    .card img{
+
+        height:230px;
+
+    }
+
+    .carrito{
+
+        border-radius:25px 25px 0 0;
+
+    }
+
+}

@@ -133,9 +133,9 @@ document.getElementById(
     "buscador"
 );
 
-const filtroRiego =
+const filtroLuz =
 document.getElementById(
-    "filtroRiego"
+    "filtroLuz"
 );
 
 const cerrarSesion =
@@ -506,9 +506,9 @@ if(buscador){
 
 }
 
-if(filtroRiego){
+if(filtroLuz){
 
-    filtroRiego.addEventListener(
+    filtroLuz.addEventListener(
         "change",
         filtrarPlantas
     );
@@ -561,8 +561,8 @@ async function filtrarPlantas(){
     const texto =
     buscador.value.toLowerCase();
 
-    const riego =
-    filtroRiego.value;
+    const luz =
+    filtroLuz.value;
 
     const querySnapshot =
     await getDocs(
@@ -592,16 +592,16 @@ async function filtrarPlantas(){
         .toLowerCase()
         .includes(texto);
 
-        const coincideRiego =
+        const coincideLuz =
 
-        riego === "" ||
+        luz === "" ||
 
-        planta.riego === riego;
+        planta.luz === luz;
 
         return (
 
             coincideNombre &&
-            coincideRiego
+            coincideLuz
 
         );
 
@@ -624,6 +624,10 @@ function renderizarPlantas(plantas){
     catalogoSol.innerHTML = "";
     catalogoSombra.innerHTML = "";
     catalogoResolana.innerHTML = "";
+
+    let totalSol = 0;
+    let totalSombra = 0;
+    let totalResolana = 0;
 
     plantas.forEach((planta) => {
 
@@ -753,12 +757,12 @@ function renderizarPlantas(plantas){
 
         `;
 
-        /* SECCIONES */
-
         if(planta.luz === "Sol"){
 
             catalogoSol.innerHTML +=
             card;
+
+            totalSol++;
 
         }
 
@@ -769,6 +773,8 @@ function renderizarPlantas(plantas){
             catalogoSombra.innerHTML +=
             card;
 
+            totalSombra++;
+
         }
 
         else{
@@ -776,9 +782,35 @@ function renderizarPlantas(plantas){
             catalogoResolana.innerHTML +=
             card;
 
+            totalResolana++;
+
         }
 
     });
+
+    const secciones =
+
+    document.querySelectorAll(
+        ".seccion-catalogo"
+    );
+
+    secciones[0].style.display =
+
+    totalSol > 0
+    ? "block"
+    : "none";
+
+    secciones[1].style.display =
+
+    totalSombra > 0
+    ? "block"
+    : "none";
+
+    secciones[2].style.display =
+
+    totalResolana > 0
+    ? "block"
+    : "none";
 
 }
 
@@ -999,10 +1031,6 @@ if(listaPedidos){
                         </p>
 
                         <p>
-                            📍 ${pedido.direccion || "Sin dirección"}
-                        </p>
-
-                        <p>
                             📅 ${pedido.fecha}
                         </p>
 
@@ -1169,12 +1197,6 @@ if(historialPedidos){
 
                                 🚚 Estado:
                                 ${pedido.estado}
-
-                            </p>
-
-                            <p>
-
-                                📍 ${pedido.direccion || "Sin dirección"}
 
                             </p>
 

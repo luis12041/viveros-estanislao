@@ -35,6 +35,10 @@
                 🌿 Viveros Estanislao
             </h1>
 
+            <p>
+                Naturaleza para tu hogar
+            </p>
+
         </div>
 
         <div class="acciones-header">
@@ -63,15 +67,6 @@
 
             </button>
 
-            <button 
-                id="cerrarSesion" 
-                class="btn-cerrar"
-            >
-
-                🚪 Cerrar sesión
-
-            </button>
-
         </div>
 
     </header>
@@ -80,14 +75,16 @@
 
     <section class="hero-premium">
 
+        <div class="hero-overlay"></div>
+
         <div class="hero-contenido">
 
             <h2>
-                Catálogo de Plantas
+                🌿 Catálogo Premium
             </h2>
 
             <p>
-                Encuentra plantas para interior y exterior 🌿
+                Encuentra plantas increíbles para interior y exterior
             </p>
 
         </div>
@@ -98,7 +95,7 @@
 
     <section class="perfil-usuario">
 
-        <div>
+        <div class="perfil-info">
 
             <h3 id="saludoUsuario">
 
@@ -114,9 +111,22 @@
 
         </div>
 
-        <div class="texto-naturaleza">
+        <div class="perfil-acciones">
 
-            🌱 Vive rodeado de naturaleza
+            <div class="texto-naturaleza">
+
+                🌱 Vive rodeado de naturaleza
+
+            </div>
+
+            <button 
+                id="cerrarSesion" 
+                class="btn-cerrar"
+            >
+
+                🚪 Cerrar sesión
+
+            </button>
 
         </div>
 
@@ -132,22 +142,22 @@
             placeholder="🔍 Buscar planta..."
         >
 
-        <select id="filtroRiego">
+        <select id="filtroLuz">
 
             <option value="">
-                Tipo de riego
+                ☀️ Tipo de luz
             </option>
 
-            <option>
-                Poco riego
+            <option value="Sol">
+                ☀️ Sol
             </option>
 
-            <option>
-                Riego moderado
+            <option value="Sombra">
+                🌑 Sombra
             </option>
 
-            <option>
-                Riego frecuente
+            <option value="Luz indirecta">
+                🌤️ Resolana
             </option>
 
         </select>
@@ -198,7 +208,7 @@
 
         <h2 class="titulo-seccion-catalogo">
 
-            🌤️ Resolana
+            🌤️ Plantas de Resolana
 
         </h2>
 
@@ -211,7 +221,7 @@
 
     </section>
 
-    <!-- HISTORIAL MODAL -->
+    <!-- HISTORIAL -->
 
     <div 
         class="modal-historial"
@@ -223,7 +233,7 @@
             <div class="historial-header">
 
                 <h2>
-                    📦 Historial
+                    📦 Historial de pedidos
                 </h2>
 
                 <span id="cerrarHistorial">
@@ -272,7 +282,7 @@
         <div class="direccion-carrito">
 
             <h3>
-                📍 Dirección entrega
+                📍 Dirección de entrega
             </h3>
 
             <input
