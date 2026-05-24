@@ -23,9 +23,23 @@
 
 <body class="admin-body">
 
+    <!-- BOTON MENU MOVIL -->
+
+    <button 
+        class="menu-movil"
+        id="abrirMenu"
+    >
+
+        ☰
+
+    </button>
+
     <!-- SIDEBAR -->
 
-    <aside class="sidebar-admin">
+    <aside 
+        class="sidebar-admin"
+        id="sidebarAdmin"
+    >
 
         <div>
 
@@ -460,6 +474,16 @@
                 "activo"
             );
 
+            /* CERRAR MENU EN CELULAR */
+
+            if(window.innerWidth <= 768){
+
+                sidebarAdmin.classList.remove(
+                    "activo"
+                );
+
+            }
+
         }
 
         /* INICIO */
@@ -477,6 +501,31 @@
             "dashboard"
         ).style.display =
         "block";
+
+        /* MENU MOVIL */
+
+        const abrirMenu =
+
+        document.getElementById(
+            "abrirMenu"
+        );
+
+        const sidebarAdmin =
+
+        document.getElementById(
+            "sidebarAdmin"
+        );
+
+        abrirMenu.addEventListener(
+            "click",
+            () => {
+
+                sidebarAdmin.classList.toggle(
+                    "activo"
+                );
+
+            }
+        );
 
     </script>
 

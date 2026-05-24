@@ -2145,3 +2145,121 @@ CELULARES PEQUEÑOS
     }
 
 }
+/* ========================================
+MENU MOVIL ADMIN
+======================================== */
+
+.menu-movil{
+
+    display:none;
+
+}
+
+/* ========================================
+RESPONSIVE ADMIN
+======================================== */
+
+@media screen and (max-width:768px){
+
+    .menu-movil{
+
+        display:flex;
+
+        position:fixed;
+
+        top:20px;
+
+        left:20px;
+
+        z-index:99999;
+
+        width:55px;
+
+        height:55px;
+
+        border:none;
+
+        border-radius:15px;
+
+        background:#2e7d32;
+
+        color:white;
+
+        font-size:28px;
+
+        align-items:center;
+
+        justify-content:center;
+
+        box-shadow:
+        0 10px 20px rgba(0,0,0,.2);
+
+    }
+
+    .sidebar-admin{
+
+        position:fixed;
+
+        left:-100%;
+
+        top:0;
+
+        width:280px;
+
+        height:100vh;
+
+        z-index:9999;
+
+        transition:.4s;
+
+    }
+
+    .sidebar-admin.activo{
+
+        left:0;
+
+    }
+
+    .contenido-admin-pro{
+
+        margin-left:0 !important;
+
+        width:100%;
+
+        padding:100px 20px 30px;
+
+    }
+
+    .top-admin h1{
+
+        font-size:38px;
+
+        line-height:1.2;
+
+    }
+
+    .cards-dashboard{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .grafica-pro{
+
+        overflow-x:auto;
+
+    }
+
+    .formulario-pro{
+
+        padding:20px;
+
+    }
+
+    .grupo-precios{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
