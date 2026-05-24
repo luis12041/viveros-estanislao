@@ -23,106 +23,128 @@ VARIABLES
 
 window.imagenURL = "";
 
-const catalogo =
-document.getElementById("catalogo");
+/* CATALOGOS */
 
-const carrito =
-document.getElementById("carrito");
-
-const abrirCarrito =
-document.getElementById("abrirCarrito");
-
-const cerrarCarrito =
-document.getElementById("cerrarCarrito");
-
-const carritoItems =
-document.getElementById("carritoItems");
-
-const contador =
-document.getElementById("contador");
-
-const totalTexto =
-document.getElementById("total");
-
-const listaPedidos =
-document.getElementById("listaPedidos");
-
-const listaInventario =
-document.getElementById("listaInventario");
-
-const botonGuardar =
-document.getElementById("guardar");
-
-const costo =
-document.getElementById("costo");
-
-const ganancia =
-document.getElementById("ganancia");
-
-const precioFinal =
-document.getElementById("precio");
-
-const buscador =
-document.getElementById("buscador");
-
-const filtroLuz =
-document.getElementById("filtroLuz");
-
-const filtroRiego =
-document.getElementById("filtroRiego");
-
-const cerrarSesion =
-document.getElementById("cerrarSesion");
-
-/* =========================
-CATEGORIAS
-========================= */
-
-const botonesCategoria =
-
-document.querySelectorAll(
-    ".categoria-btn"
+const catalogoSol =
+document.getElementById(
+    "catalogoSol"
 );
 
-let categoriaActiva =
-"Todas";
+const catalogoSombra =
+document.getElementById(
+    "catalogoSombra"
+);
 
-botonesCategoria.forEach(btn => {
+const catalogoResolana =
+document.getElementById(
+    "catalogoResolana"
+);
 
-    btn.addEventListener(
-        "click",
-        () => {
+/* CARRITO */
 
-            botonesCategoria.forEach(b => {
+const carrito =
+document.getElementById(
+    "carrito"
+);
 
-                b.classList.remove(
-                    "activa"
-                );
+const abrirCarrito =
+document.getElementById(
+    "abrirCarrito"
+);
 
-            });
+const cerrarCarrito =
+document.getElementById(
+    "cerrarCarrito"
+);
 
-            btn.classList.add(
-                "activa"
-            );
+const carritoItems =
+document.getElementById(
+    "carritoItems"
+);
 
-            categoriaActiva =
+const contador =
+document.getElementById(
+    "contador"
+);
 
-            btn.innerText
-            .replace("☀️","")
-            .replace("🌑","")
-            .replace("🌤️","")
-            .replace("🌿","")
-            .trim();
+const totalTexto =
+document.getElementById(
+    "total"
+);
 
-            filtrarPlantas();
+/* HISTORIAL */
 
-        }
-    );
+const abrirHistorial =
+document.getElementById(
+    "abrirHistorial"
+);
 
-});
+const cerrarHistorial =
+document.getElementById(
+    "cerrarHistorial"
+);
+
+const modalHistorial =
+document.getElementById(
+    "modalHistorial"
+);
+
+const historialPedidos =
+document.getElementById(
+    "historialPedidos"
+);
+
+/* ADMIN */
+
+const listaPedidos =
+document.getElementById(
+    "listaPedidos"
+);
+
+const listaInventario =
+document.getElementById(
+    "listaInventario"
+);
+
+const botonGuardar =
+document.getElementById(
+    "guardar"
+);
+
+/* INPUTS */
+
+const costo =
+document.getElementById(
+    "costo"
+);
+
+const ganancia =
+document.getElementById(
+    "ganancia"
+);
+
+const precioFinal =
+document.getElementById(
+    "precio"
+);
+
+const buscador =
+document.getElementById(
+    "buscador"
+);
+
+const filtroRiego =
+document.getElementById(
+    "filtroRiego"
+);
+
+const cerrarSesion =
+document.getElementById(
+    "cerrarSesion"
+);
 
 /* =========================
-USUARIO CONECTADO
+USUARIO
 ========================= */
 
 const usuarioGuardado =
@@ -153,7 +175,7 @@ if(
 }
 
 /* =========================
-GUARDAR DIRECCION
+DIRECCION
 ========================= */
 
 const inputDireccion =
@@ -224,7 +246,9 @@ TOAST
 function mostrarToast(texto){
 
     const toast =
-    document.createElement("div");
+    document.createElement(
+        "div"
+    );
 
     toast.classList.add(
         "toast"
@@ -254,8 +278,6 @@ if(cerrarSesion){
         "click",
         () => {
 
-            /* LIMPIAR TODO */
-
             localStorage.clear();
 
             sessionStorage.clear();
@@ -271,6 +293,40 @@ if(cerrarSesion){
                 );
 
             },500);
+
+        }
+    );
+
+}
+
+/* =========================
+MODAL HISTORIAL
+========================= */
+
+if(abrirHistorial){
+
+    abrirHistorial.addEventListener(
+        "click",
+        () => {
+
+            modalHistorial.classList.add(
+                "activo"
+            );
+
+        }
+    );
+
+}
+
+if(cerrarHistorial){
+
+    cerrarHistorial.addEventListener(
+        "click",
+        () => {
+
+            modalHistorial.classList.remove(
+                "activo"
+            );
 
         }
     );
@@ -450,15 +506,6 @@ if(buscador){
 
 }
 
-if(filtroLuz){
-
-    filtroLuz.addEventListener(
-        "change",
-        filtrarPlantas
-    );
-
-}
-
 if(filtroRiego){
 
     filtroRiego.addEventListener(
@@ -472,7 +519,7 @@ if(filtroRiego){
 MOSTRAR PLANTAS
 ========================= */
 
-if(catalogo){
+if(catalogoSol){
 
     mostrarPlantas();
 
@@ -499,7 +546,9 @@ async function mostrarPlantas(){
 
     });
 
-    renderizarPlantas(plantas);
+    renderizarPlantas(
+        plantas
+    );
 
 }
 
@@ -511,9 +560,6 @@ async function filtrarPlantas(){
 
     const texto =
     buscador.value.toLowerCase();
-
-    const luz =
-    filtroLuz.value;
 
     const riego =
     filtroRiego.value;
@@ -546,54 +592,16 @@ async function filtrarPlantas(){
         .toLowerCase()
         .includes(texto);
 
-        const coincideLuz =
-
-        luz === "" ||
-
-        planta.luz === luz;
-
         const coincideRiego =
 
         riego === "" ||
 
         planta.riego === riego;
 
-        let coincideCategoria =
-        true;
-
-        if(
-            categoriaActiva === "Sol"
-        ){
-
-            coincideCategoria =
-            planta.luz === "Sol";
-
-        }
-
-        if(
-            categoriaActiva === "Sombra"
-        ){
-
-            coincideCategoria =
-            planta.luz === "Sombra";
-
-        }
-
-        if(
-            categoriaActiva === "Resolana"
-        ){
-
-            coincideCategoria =
-            planta.luz === "Luz indirecta";
-
-        }
-
         return (
 
             coincideNombre &&
-            coincideLuz &&
-            coincideRiego &&
-            coincideCategoria
+            coincideRiego
 
         );
 
@@ -611,14 +619,15 @@ RENDERIZAR
 
 function renderizarPlantas(plantas){
 
-    if(!catalogo) return;
+    if(!catalogoSol) return;
 
-    catalogo.innerHTML = "";
+    catalogoSol.innerHTML = "";
+    catalogoSombra.innerHTML = "";
+    catalogoResolana.innerHTML = "";
 
     plantas.forEach((planta) => {
 
         let alertaStock = "";
-
         let botonStock = "";
 
         const esFavorito =
@@ -673,7 +682,7 @@ function renderizarPlantas(plantas){
 
         }
 
-        catalogo.innerHTML += `
+        const card = `
 
             <div class="card">
 
@@ -744,12 +753,37 @@ function renderizarPlantas(plantas){
 
         `;
 
+        /* SECCIONES */
+
+        if(planta.luz === "Sol"){
+
+            catalogoSol.innerHTML +=
+            card;
+
+        }
+
+        else if(
+            planta.luz === "Sombra"
+        ){
+
+            catalogoSombra.innerHTML +=
+            card;
+
+        }
+
+        else{
+
+            catalogoResolana.innerHTML +=
+            card;
+
+        }
+
     });
 
 }
 
 /* =========================
-INFO DESPLEGABLE
+INFO
 ========================= */
 
 window.toggleInfo = function(btn){
@@ -910,7 +944,7 @@ function actualizarCarrito(){
 }
 
 /* =========================
-ELIMINAR PRODUCTO
+ELIMINAR
 ========================= */
 
 window.eliminarProducto = function(index){
@@ -934,7 +968,7 @@ window.eliminarProducto = function(index){
 };
 
 /* =========================
-PEDIDOS TIEMPO REAL
+PEDIDOS ADMIN
 ========================= */
 
 if(listaPedidos){
@@ -1082,14 +1116,8 @@ async function(id,estado){
 };
 
 /* =========================
-HISTORIAL PEDIDOS
+HISTORIAL
 ========================= */
-
-const historialPedidos =
-
-document.getElementById(
-    "historialPedidos"
-);
 
 if(historialPedidos){
 
@@ -1146,7 +1174,7 @@ if(historialPedidos){
 
                             <p>
 
-                                📍 ${pedido.direccion}
+                                📍 ${pedido.direccion || "Sin dirección"}
 
                             </p>
 

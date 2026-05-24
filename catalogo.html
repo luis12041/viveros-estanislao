@@ -19,15 +19,13 @@
         href="css/style.css"
     >
 
-    <!-- STRIPE -->
-
     <script src="https://js.stripe.com/v3/"></script>
 
 </head>
 
 <body>
 
-    <!-- HEADER PREMIUM -->
+    <!-- HEADER -->
 
     <header class="header-premium">
 
@@ -42,11 +40,21 @@
         <div class="acciones-header">
 
             <button 
+                id="abrirHistorial"
+                class="btn-historial"
+            >
+
+                📦
+
+            </button>
+
+            <button 
                 id="abrirCarrito"
                 class="btn-carrito-premium"
             >
 
                 🛒 
+
                 <span id="contador">
 
                     0
@@ -114,36 +122,6 @@
 
     </section>
 
-    <!-- CATEGORIAS -->
-
-    <section class="categorias">
-
-        <button class="categoria-btn activa">
-
-            🌿 Todas
-
-        </button>
-
-        <button class="categoria-btn">
-
-            ☀️ Sol
-
-        </button>
-
-        <button class="categoria-btn">
-
-            🌑 Sombra
-
-        </button>
-
-        <button class="categoria-btn">
-
-            🌤️ Resolana
-
-        </button>
-
-    </section>
-
     <!-- FILTROS -->
 
     <section class="filtros">
@@ -153,26 +131,6 @@
             id="buscador"
             placeholder="🔍 Buscar planta..."
         >
-
-        <select id="filtroLuz">
-
-            <option value="">
-                Tipo de luz
-            </option>
-
-            <option>
-                Sol
-            </option>
-
-            <option>
-                Sombra
-            </option>
-
-            <option>
-                Luz indirecta
-            </option>
-
-        </select>
 
         <select id="filtroRiego">
 
@@ -196,47 +154,96 @@
 
     </section>
 
-    <!-- CATALOGO -->
+    <!-- SOL -->
 
-    <section 
-        class="catalogo"
-        id="catalogo"
-    >
+    <section class="seccion-catalogo">
 
-    </section>
+        <h2 class="titulo-seccion-catalogo">
 
-    <!-- DIRECCION -->
+            ☀️ Plantas de Sol
 
-    <section class="direccion-entrega">
-
-        <h2>
-            📍 Dirección de entrega
-        </h2>
-
-        <input
-            type="text"
-            id="direccionEntrega"
-            placeholder="Ejemplo: Calle Hidalgo #25, Tejupilco"
-        >
-
-    </section>
-
-    <!-- HISTORIAL -->
-
-    <section class="historial">
-
-        <h2>
-            📦 Historial de pedidos
         </h2>
 
         <div 
-            class="historial-grid"
-            id="historialPedidos"
+            class="catalogo"
+            id="catalogoSol"
         >
 
         </div>
 
     </section>
+
+    <!-- SOMBRA -->
+
+    <section class="seccion-catalogo">
+
+        <h2 class="titulo-seccion-catalogo">
+
+            🌑 Plantas de Sombra
+
+        </h2>
+
+        <div 
+            class="catalogo"
+            id="catalogoSombra"
+        >
+
+        </div>
+
+    </section>
+
+    <!-- RESOLANA -->
+
+    <section class="seccion-catalogo">
+
+        <h2 class="titulo-seccion-catalogo">
+
+            🌤️ Resolana
+
+        </h2>
+
+        <div 
+            class="catalogo"
+            id="catalogoResolana"
+        >
+
+        </div>
+
+    </section>
+
+    <!-- HISTORIAL MODAL -->
+
+    <div 
+        class="modal-historial"
+        id="modalHistorial"
+    >
+
+        <div class="contenido-historial">
+
+            <div class="historial-header">
+
+                <h2>
+                    📦 Historial
+                </h2>
+
+                <span id="cerrarHistorial">
+
+                    ✖
+
+                </span>
+
+            </div>
+
+            <div 
+                class="historial-grid"
+                id="historialPedidos"
+            >
+
+            </div>
+
+        </div>
+
+    </div>
 
     <!-- CARRITO -->
 
@@ -257,6 +264,22 @@
         </div>
 
         <div id="carritoItems">
+
+        </div>
+
+        <!-- DIRECCION -->
+
+        <div class="direccion-carrito">
+
+            <h3>
+                📍 Dirección entrega
+            </h3>
+
+            <input
+                type="text"
+                id="direccionEntrega"
+                placeholder="Ejemplo: Calle Hidalgo #25"
+            >
 
         </div>
 

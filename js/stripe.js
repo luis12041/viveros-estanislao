@@ -21,6 +21,12 @@ if(finalizarCompra){
                 )
             ) || [];
 
+            const direccion =
+
+            document.getElementById(
+                "direccionEntrega"
+            ).value;
+
             if(
                 carritoProductos.length === 0
             ){
@@ -32,6 +38,23 @@ if(finalizarCompra){
                 return;
 
             }
+
+            if(
+                direccion.trim() === ""
+            ){
+
+                alert(
+                    "Agrega una dirección"
+                );
+
+                return;
+
+            }
+
+            localStorage.setItem(
+                "direccionEntrega",
+                direccion
+            );
 
             try{
 
