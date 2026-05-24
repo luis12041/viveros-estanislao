@@ -6,6 +6,10 @@ importScripts(
     "https://www.gstatic.com/firebasejs/12.2.1/firebase-messaging-compat.js"
 );
 
+/* =========================
+FIREBASE
+========================= */
+
 firebase.initializeApp({
 
     apiKey:
@@ -31,10 +35,18 @@ firebase.initializeApp({
 const messaging =
 firebase.messaging();
 
-/* NOTIFICACION */
+/* =========================
+NOTIFICACION EN BACKGROUND
+========================= */
 
 messaging.onBackgroundMessage(
+
     (payload) => {
+
+        console.log(
+            "🔥 Background message",
+            payload
+        );
 
         self.registration.showNotification(
 
@@ -46,11 +58,51 @@ messaging.onBackgroundMessage(
                 payload.notification.body,
 
                 icon:
-                "/img/logo.png"
+                "https://viveros-estanislao.vercel.app/img/logo.png",
+
+                badge:
+                "https://viveros-estanislao.vercel.app/img/logo.png",
+
+                vibrate:
+                [200,100,200],
+
+                data: {
+
+                    url:
+                    "https://viveros-estanislao.vercel.app/admin.html"
+
+                }
 
             }
 
         );
 
     }
+
+);
+
+/* =========================
+CLICK NOTIFICACION
+========================= */
+
+self.addEventListener(
+
+    "notificationclick",
+
+    (event) => {
+
+        event.notification.close();
+
+        event.waitUntil(
+
+            clients.openWindow(
+
+                event.notification.data.url
+
+            )
+
+        );
+
+    }
+
 );
