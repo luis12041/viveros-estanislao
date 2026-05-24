@@ -8,6 +8,17 @@ import {
 } from
 "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
+import {
+
+    getMessaging,
+    getToken,
+    onMessage
+
+} from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-messaging.js";
+
+/* FIREBASE */
+
 const firebaseConfig = {
 
     apiKey:
@@ -38,6 +49,104 @@ initializeApp(firebaseConfig);
 
 const db =
 getFirestore(app);
+
+/* =========================
+NOTIFICACIONES
+========================= */
+
+const messaging =
+getMessaging(app);
+
+/* PEDIR PERMISO */
+
+async function activarNotificaciones(){
+
+    try{
+
+        const permiso =
+        await Notification.requestPermission();
+
+        if(
+            permiso === "granted"
+        ){
+
+            console.log(
+                "✅ Permiso concedido"
+            );
+
+            const token =
+            await getToken(
+
+                messaging,
+
+                {
+
+                    vapidKey:
+                    "BJLkj1kaaABdTZayvEsYa3SkAosXCo8SM2NmozHUYPdTWm7FWCpDIqHS3WAL6pyjEWMDBk0wHpYMDUE9q13-pwE"
+
+                }
+
+            );
+
+            console.log(
+                "🔥 TOKEN:",
+                token
+            );
+
+            /* GUARDAR TOKEN */
+
+            localStorage.setItem(
+                "tokenNotificacion",
+                token
+            );
+
+        }
+
+    }catch(error){
+
+        console.log(
+            error
+        );
+
+    }
+
+}
+
+/* ACTIVAR */
+
+activarNotificaciones();
+
+/* NOTIFICACION ABIERTA */
+
+onMessage(
+
+    messaging,
+
+    (payload) => {
+
+        console.log(
+            payload
+        );
+
+        new Notification(
+
+            payload.notification.title,
+
+            {
+
+                body:
+                payload.notification.body,
+
+                icon:
+                "/img/logo.png"
+
+            }
+
+        );
+
+    }
+
+);
 
 export { db };
 
