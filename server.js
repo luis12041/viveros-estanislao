@@ -145,7 +145,42 @@ app.post(
             );
 
             /* =========================
-            OBTENER TOKEN ADMIN
+            STRIPE
+            ========================= */
+
+            const session =
+
+            await stripe.checkout.sessions.create({
+
+                payment_method_types:
+                ["card"],
+
+                line_items,
+
+                mode:
+                "payment",
+
+                success_url:
+                "https://viveros-estanislao.vercel.app/success.html",
+
+                cancel_url:
+                "https://viveros-estanislao.vercel.app/cancel.html"
+
+            });
+
+            /* =========================
+            RESPUESTA RAPIDA
+            ========================= */
+
+            res.json({
+
+                id:
+                session.id
+
+            });
+
+            /* =========================
+            PUSH EN SEGUNDO PLANO
             ========================= */
 
             try{
@@ -181,11 +216,9 @@ app.post(
                         tokenAdmin
                     );
 
-                    /* =========================
-                    ENVIAR PUSH
-                    ========================= */
+                    /* ENVIAR PUSH */
 
-                    await admin.messaging().send({
+                    admin.messaging().send({
 
                         token:
                         tokenAdmin,
@@ -211,58 +244,41 @@ app.post(
 
                         }
 
-                    });
+                    })
 
-                    console.log(
-                        "🔥 Notificación enviada al admin"
-                    );
+                    .then(() => {
+
+                        console.log(
+                            "🔥 Notificación enviada al admin"
+                        );
+
+                    })
+
+                    .catch((firebaseError) => {
+
+                        console.log(
+                            "❌ ERROR FIREBASE"
+                        );
+
+                        console.log(
+                            firebaseError
+                        );
+
+                    });
 
                 }
 
-            }catch(firebaseError){
+            }catch(errorPush){
 
                 console.log(
-                    "❌ ERROR FIREBASE"
+                    "❌ ERROR PUSH"
                 );
 
                 console.log(
-                    firebaseError
+                    errorPush
                 );
 
             }
-
-            /* =========================
-            STRIPE
-            ========================= */
-
-            const session =
-
-            await stripe.checkout.sessions.create({
-
-                payment_method_types:
-                ["card"],
-
-                line_items,
-
-                mode:
-                "payment",
-
-                success_url:
-                "https://viveros-estanislao.vercel.app/success.html",
-
-                cancel_url:
-                "https://viveros-estanislao.vercel.app/cancel.html"
-
-            });
-
-            /* RESPUESTA */
-
-            res.json({
-
-                id:
-                session.id
-
-            });
 
         }catch(error){
 
