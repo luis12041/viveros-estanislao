@@ -91,6 +91,14 @@ app.post(
 
             } = req.body;
 
+            console.log(
+                "📲 TOKEN RECIBIDO:"
+            );
+
+            console.log(
+                tokenNotificacion
+            );
+
             const line_items =
 
             productos.map(
@@ -138,7 +146,65 @@ app.post(
                 }
             );
 
-            /* STRIPE */
+            /* =========================
+            ENVIAR NOTIFICACION
+            ========================= */
+
+            if(
+                tokenNotificacion
+            ){
+
+                try{
+
+                    await admin.messaging().send({
+
+                        token:
+                        tokenNotificacion,
+
+                        notification: {
+
+                            title:
+                            "🌿 Nueva compra",
+
+                            body:
+                            `Se realizó una compra de $${total}`
+
+                        },
+
+                        webpush: {
+
+                            notification: {
+
+                                icon:
+                                "https://viveros-estanislao.vercel.app/img/logo.png"
+
+                            }
+
+                        }
+
+                    });
+
+                    console.log(
+                        "🔥 Notificación enviada"
+                    );
+
+                }catch(firebaseError){
+
+                    console.log(
+                        "❌ ERROR FIREBASE"
+                    );
+
+                    console.log(
+                        firebaseError
+                    );
+
+                }
+
+            }
+
+            /* =========================
+            STRIPE
+            ========================= */
 
             const session =
 
@@ -160,48 +226,6 @@ app.post(
 
             });
 
-            /* =========================
-            NOTIFICACION
-            ========================= */
-
-            if(
-                tokenNotificacion
-            ){
-
-                await admin.messaging().send({
-
-                    token:
-                    tokenNotificacion,
-
-                    notification: {
-
-                        title:
-                        "🌿 Nueva compra",
-
-                        body:
-                        `Se realizó una compra de $${total}`
-
-                    },
-
-                    webpush: {
-
-                        notification: {
-
-                            icon:
-                            "https://viveros-estanislao.vercel.app/img/logo.png"
-
-                        }
-
-                    }
-
-                });
-
-                console.log(
-                    "🔥 Notificación enviada"
-                );
-
-            }
-
             /* RESPUESTA */
 
             res.json({
@@ -213,7 +237,13 @@ app.post(
 
         }catch(error){
 
-            console.log(error);
+            console.log(
+                "❌ ERROR GENERAL"
+            );
+
+            console.log(
+                error
+            );
 
             res.status(500).json({
 
