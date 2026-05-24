@@ -17,7 +17,9 @@ import {
 } from
 "https://www.gstatic.com/firebasejs/12.2.1/firebase-messaging.js";
 
-/* FIREBASE */
+/* =========================
+FIREBASE
+========================= */
 
 const firebaseConfig = {
 
@@ -51,13 +53,48 @@ const db =
 getFirestore(app);
 
 /* =========================
+SERVICE WORKER
+========================= */
+
+if(
+    "serviceWorker" in navigator
+){
+
+    navigator.serviceWorker.register(
+
+        "/firebase-messaging-sw.js"
+
+    )
+
+    .then(() => {
+
+        console.log(
+            "🔥 Service Worker listo"
+        );
+
+    })
+
+    .catch((error) => {
+
+        console.log(
+            "❌ Error Service Worker",
+            error
+        );
+
+    });
+
+}
+
+/* =========================
 NOTIFICACIONES
 ========================= */
 
 const messaging =
 getMessaging(app);
 
-/* PEDIR PERMISO */
+/* =========================
+PEDIR PERMISO
+========================= */
 
 async function activarNotificaciones(){
 
@@ -93,11 +130,24 @@ async function activarNotificaciones(){
                 token
             );
 
+            alert(token);
+
             /* GUARDAR TOKEN */
 
             localStorage.setItem(
+
                 "tokenNotificacion",
+
                 token
+
+            );
+
+        }
+
+        else{
+
+            console.log(
+                "❌ Permiso denegado"
             );
 
         }
@@ -105,6 +155,7 @@ async function activarNotificaciones(){
     }catch(error){
 
         console.log(
+            "❌ Error notificaciones",
             error
         );
 
@@ -112,11 +163,29 @@ async function activarNotificaciones(){
 
 }
 
-/* ACTIVAR */
+/* =========================
+ACTIVAR
+========================= */
 
-activarNotificaciones();
+window.addEventListener(
 
-/* NOTIFICACION ABIERTA */
+    "load",
+
+    () => {
+
+        setTimeout(() => {
+
+            activarNotificaciones();
+
+        },2000);
+
+    }
+
+);
+
+/* =========================
+NOTIFICACION ABIERTA
+========================= */
 
 onMessage(
 
@@ -125,6 +194,7 @@ onMessage(
     (payload) => {
 
         console.log(
+            "📩 Notificación recibida",
             payload
         );
 
