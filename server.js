@@ -73,6 +73,13 @@ admin.initializeApp({
 });
 
 /* =========================
+FIRESTORE
+========================= */
+
+const db =
+admin.firestore();
+
+/* =========================
 CREAR PAGO
 ========================= */
 
@@ -86,18 +93,9 @@ app.post(
 
             const {
 
-                productos,
-                tokenNotificacion
+                productos
 
             } = req.body;
-
-            console.log(
-                "📲 TOKEN RECIBIDO:"
-            );
-
-            console.log(
-                tokenNotificacion
-            );
 
             const line_items =
 
@@ -147,19 +145,50 @@ app.post(
             );
 
             /* =========================
-            ENVIAR NOTIFICACION
+            OBTENER TOKEN ADMIN
             ========================= */
 
-            if(
-                tokenNotificacion
-            ){
+            try{
 
-                try{
+                const docRef =
+
+                db.collection(
+                    "configuracion"
+                )
+
+                .doc(
+                    "admin"
+                );
+
+                const snap =
+                await docRef.get();
+
+                if(
+                    snap.exists
+                ){
+
+                    const data =
+                    snap.data();
+
+                    const tokenAdmin =
+                    data.tokenAdmin;
+
+                    console.log(
+                        "🔥 TOKEN ADMIN:"
+                    );
+
+                    console.log(
+                        tokenAdmin
+                    );
+
+                    /* =========================
+                    ENVIAR PUSH
+                    ========================= */
 
                     await admin.messaging().send({
 
                         token:
-                        tokenNotificacion,
+                        tokenAdmin,
 
                         notification: {
 
@@ -185,20 +214,20 @@ app.post(
                     });
 
                     console.log(
-                        "🔥 Notificación enviada"
-                    );
-
-                }catch(firebaseError){
-
-                    console.log(
-                        "❌ ERROR FIREBASE"
-                    );
-
-                    console.log(
-                        firebaseError
+                        "🔥 Notificación enviada al admin"
                     );
 
                 }
+
+            }catch(firebaseError){
+
+                console.log(
+                    "❌ ERROR FIREBASE"
+                );
+
+                console.log(
+                    firebaseError
+                );
 
             }
 
