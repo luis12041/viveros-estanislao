@@ -1736,3 +1736,412 @@ CATEGORIA ACTIVA PRO
     transform:translateY(-2px);
 
 }
+/* ========================================
+TABLETS
+======================================== */
+
+@media screen and (max-width:1024px){
+
+    .header-premium{
+
+        padding:20px;
+
+    }
+
+    .hero-contenido h2{
+
+        font-size:46px;
+
+    }
+
+    .hero-contenido p{
+
+        font-size:18px;
+
+    }
+
+    .catalogo{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+    .carrito{
+
+        width:380px;
+
+    }
+
+}
+
+/* ========================================
+CELULARES
+======================================== */
+
+@media screen and (max-width:768px){
+
+    body{
+
+        overflow-x:hidden;
+
+    }
+
+    /* HEADER */
+
+    .header-premium{
+
+        flex-direction:column;
+
+        gap:18px;
+
+        padding:20px 15px;
+
+        text-align:center;
+
+    }
+
+    .logo-header h1{
+
+        font-size:28px;
+
+        line-height:1.3;
+
+    }
+
+    .acciones-header{
+
+        width:100%;
+
+        justify-content:center;
+
+        flex-wrap:wrap;
+
+    }
+
+    .btn-carrito-premium{
+
+        width:65px;
+
+        height:50px;
+
+        font-size:18px;
+
+    }
+
+    .btn-cerrar{
+
+        width:100%;
+
+        padding:15px;
+
+        font-size:15px;
+
+    }
+
+    /* HERO */
+
+    .hero-premium{
+
+        width:92%;
+
+        margin:25px auto;
+
+        padding:60px 20px;
+
+        border-radius:25px;
+
+    }
+
+    .hero-contenido h2{
+
+        font-size:34px;
+
+        line-height:1.2;
+
+    }
+
+    .hero-contenido p{
+
+        font-size:16px;
+
+        margin-top:10px;
+
+    }
+
+    /* PERFIL */
+
+    .perfil-usuario{
+
+        width:92%;
+
+        flex-direction:column;
+
+        text-align:center;
+
+        gap:15px;
+
+        padding:20px;
+
+    }
+
+    .perfil-usuario h3{
+
+        font-size:24px;
+
+    }
+
+    .texto-naturaleza{
+
+        font-size:15px;
+
+    }
+
+    /* CATEGORIAS */
+
+    .categorias{
+
+        width:92%;
+
+        gap:10px;
+
+    }
+
+    .categoria-btn{
+
+        flex:1 1 40%;
+
+        font-size:14px;
+
+        padding:12px;
+
+    }
+
+    /* FILTROS */
+
+    .filtros{
+
+        width:92%;
+
+        grid-template-columns:1fr;
+
+    }
+
+    .filtros input,
+    .filtros select{
+
+        width:100%;
+
+        font-size:15px;
+
+    }
+
+    /* CATALOGO */
+
+    .catalogo{
+
+        width:92%;
+
+        grid-template-columns:1fr;
+
+        gap:20px;
+
+    }
+
+    .card{
+
+        border-radius:22px;
+
+    }
+
+    .card img{
+
+        height:240px;
+
+    }
+
+    .info{
+
+        padding:18px;
+
+    }
+
+    .info h3{
+
+        font-size:24px;
+
+    }
+
+    .precio{
+
+        font-size:26px;
+
+    }
+
+    .btn{
+
+        padding:15px;
+
+        font-size:15px;
+
+    }
+
+    /* DIRECCION */
+
+    .direccion-entrega{
+
+        width:92%;
+
+        padding:22px;
+
+    }
+
+    .direccion-entrega h2{
+
+        font-size:22px;
+
+    }
+
+    .direccion-entrega input{
+
+        font-size:15px;
+
+    }
+
+    /* HISTORIAL */
+
+    .historial{
+
+        width:92%;
+
+    }
+
+    .historial-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    /* CARRITO */
+
+    .carrito{
+
+        width:100%;
+
+        right:-100%;
+
+        padding:20px;
+
+    }
+
+    .carrito.activo{
+
+        right:0;
+
+    }
+
+    .carrito-header h2{
+
+        font-size:28px;
+
+    }
+
+    .item-carrito{
+
+        align-items:flex-start;
+
+    }
+
+    .item-carrito img{
+
+        width:70px;
+
+        height:70px;
+
+    }
+
+    #total{
+
+        font-size:24px;
+
+    }
+
+    #finalizarCompra{
+
+        font-size:16px;
+
+        padding:16px;
+
+    }
+
+    /* TOAST */
+
+    .toast{
+
+        right:15px;
+
+        left:15px;
+
+        bottom:20px;
+
+        text-align:center;
+
+    }
+
+}
+
+/* ========================================
+CELULARES PEQUEÑOS
+======================================== */
+
+@media screen and (max-width:480px){
+
+    .hero-contenido h2{
+
+        font-size:28px;
+
+    }
+
+    .hero-contenido p{
+
+        font-size:15px;
+
+    }
+
+    .logo-header h1{
+
+        font-size:24px;
+
+    }
+
+    .perfil-usuario h3{
+
+        font-size:20px;
+
+    }
+
+    .categoria-btn{
+
+        font-size:13px;
+
+    }
+
+    .info h3{
+
+        font-size:22px;
+
+    }
+
+    .precio{
+
+        font-size:24px;
+
+    }
+
+    .card img{
+
+        height:210px;
+
+    }
+
+}
