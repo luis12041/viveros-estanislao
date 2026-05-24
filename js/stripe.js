@@ -51,10 +51,24 @@ if(finalizarCompra){
 
             }
 
+            /* GUARDAR DIRECCION */
+
             localStorage.setItem(
+
                 "direccionEntrega",
+
                 direccion
+
             );
+
+            /* LOADING */
+
+            finalizarCompra.disabled =
+            true;
+
+            finalizarCompra.innerHTML =
+
+            "⏳ Procesando pago...";
 
             try{
 
@@ -88,7 +102,9 @@ if(finalizarCompra){
                 const session =
                 await response.json();
 
-                stripe.redirectToCheckout({
+                /* REDIRECT */
+
+                await stripe.redirectToCheckout({
 
                     sessionId:
                     session.id
@@ -102,6 +118,13 @@ if(finalizarCompra){
                 alert(
                     "Error con Stripe"
                 );
+
+                finalizarCompra.disabled =
+                false;
+
+                finalizarCompra.innerHTML =
+
+                "Finalizar compra";
 
             }
 
