@@ -89,13 +89,23 @@ app.post(
 
     async (req,res) => {
 
+        console.log(
+            "🔥 ENTRÓ A /crear-pago"
+        );
+
         try{
 
             const {
-
                 productos
-
             } = req.body;
+
+            console.log(
+                "🔥 PRODUCTOS:"
+            );
+
+            console.log(
+                productos
+            );
 
             const line_items =
 
@@ -144,6 +154,14 @@ app.post(
                 }
             );
 
+            console.log(
+                "🔥 TOTAL:"
+            );
+
+            console.log(
+                total
+            );
+
             /* =========================
             STRIPE
             ========================= */
@@ -168,6 +186,10 @@ app.post(
 
             });
 
+            console.log(
+                "🔥 SESION STRIPE CREADA"
+            );
+
             /* =========================
             RESPUESTA RAPIDA
             ========================= */
@@ -184,6 +206,10 @@ app.post(
             ========================= */
 
             try{
+
+                console.log(
+                    "🔥 BUSCANDO TOKEN ADMIN..."
+                );
 
                 const docRef =
 
@@ -202,6 +228,10 @@ app.post(
                     snap.exists
                 ){
 
+                    console.log(
+                        "🔥 DOCUMENTO ADMIN ENCONTRADO"
+                    );
+
                     const data =
                     snap.data();
 
@@ -216,7 +246,9 @@ app.post(
                         tokenAdmin
                     );
 
-                    /* ENVIAR PUSH */
+                    /* =========================
+                    ENVIAR PUSH
+                    ========================= */
 
                     admin.messaging().send({
 
@@ -246,10 +278,14 @@ app.post(
 
                     })
 
-                    .then(() => {
+                    .then((response) => {
 
                         console.log(
-                            "🔥 Notificación enviada al admin"
+                            "🔥 NOTIFICACION ENVIADA"
+                        );
+
+                        console.log(
+                            response
                         );
 
                     })
@@ -265,6 +301,12 @@ app.post(
                         );
 
                     });
+
+                }else{
+
+                    console.log(
+                        "❌ NO EXISTE DOCUMENTO ADMIN"
+                    );
 
                 }
 
