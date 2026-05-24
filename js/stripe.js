@@ -27,6 +27,16 @@ if(finalizarCompra){
                 "direccionEntrega"
             ).value;
 
+            /* TOKEN */
+
+            const tokenNotificacion =
+
+            localStorage.getItem(
+                "tokenNotificacion"
+            );
+
+            /* VALIDAR CARRITO */
+
             if(
                 carritoProductos.length === 0
             ){
@@ -38,6 +48,8 @@ if(finalizarCompra){
                 return;
 
             }
+
+            /* VALIDAR DIRECCION */
 
             if(
                 direccion.trim() === ""
@@ -91,7 +103,10 @@ if(finalizarCompra){
                         body:JSON.stringify({
 
                             productos:
-                            carritoProductos
+                            carritoProductos,
+
+                            tokenNotificacion:
+                            tokenNotificacion
 
                         })
 
