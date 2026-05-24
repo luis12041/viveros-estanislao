@@ -142,11 +142,15 @@ async function activarNotificaciones(){
 
             );
 
+            /* OCULTAR BOTON */
+
+            boton.remove();
+
         }
 
         else{
 
-            console.log(
+            alert(
                 "❌ Permiso denegado"
             );
 
@@ -159,13 +163,69 @@ async function activarNotificaciones(){
             error
         );
 
+        alert(
+            "❌ Error activando notificaciones"
+        );
+
     }
 
 }
 
 /* =========================
-ACTIVAR
+BOTON TEMPORAL
 ========================= */
+
+const boton =
+
+document.createElement(
+    "button"
+);
+
+boton.innerHTML =
+"🔔 Activar notificaciones";
+
+/* ESTILOS */
+
+boton.style.position =
+"fixed";
+
+boton.style.bottom =
+"20px";
+
+boton.style.right =
+"20px";
+
+boton.style.zIndex =
+"99999";
+
+boton.style.padding =
+"15px 22px";
+
+boton.style.border =
+"none";
+
+boton.style.borderRadius =
+"18px";
+
+boton.style.background =
+"#2e7d32";
+
+boton.style.color =
+"white";
+
+boton.style.fontSize =
+"16px";
+
+boton.style.fontWeight =
+"bold";
+
+boton.style.boxShadow =
+"0 10px 20px rgba(0,0,0,.2)";
+
+boton.style.cursor =
+"pointer";
+
+/* AGREGAR */
 
 window.addEventListener(
 
@@ -173,11 +233,23 @@ window.addEventListener(
 
     () => {
 
-        setTimeout(() => {
+        document.body.appendChild(
+            boton
+        );
 
-            activarNotificaciones();
+    }
 
-        },2000);
+);
+
+/* CLICK */
+
+boton.addEventListener(
+
+    "click",
+
+    async () => {
+
+        await activarNotificaciones();
 
     }
 
