@@ -139,7 +139,9 @@ app.post(
 
             );
 
-            /* TOTAL */
+            /* =========================
+            TOTAL
+            ========================= */
 
             let total = 0;
 
@@ -163,7 +165,7 @@ app.post(
             );
 
             /* =========================
-            STRIPE
+            STRIPE SESSION
             ========================= */
 
             const session =
@@ -190,14 +192,21 @@ app.post(
                 "🔥 SESION STRIPE CREADA"
             );
 
+            console.log(
+                session
+            );
+
             /* =========================
-            RESPUESTA RAPIDA
+            RESPUESTA REACT
             ========================= */
 
             res.json({
 
                 id:
-                session.id
+                session.id,
+
+                url:
+                session.url
 
             });
 
@@ -302,7 +311,9 @@ app.post(
 
                     });
 
-                }else{
+                }
+
+                else{
 
                     console.log(
                         "❌ NO EXISTE DOCUMENTO ADMIN"
